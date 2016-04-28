@@ -49,7 +49,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 //        player.setPlayerStateChangeListener(playerStateChangeListener);
 //        player.setPlaybackEventListener(playbackEventListener);
         this.player = player;
-        String mVideoId = "vtg4o__aRMg";
+        String mVideoId = "r_KlltnQJbQ";
 
         if (mVideoId != null) {
             if (wasRestored) {
