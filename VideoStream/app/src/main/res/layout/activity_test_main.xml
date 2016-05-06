@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.group35.videostream.TestMainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/loginSpace"
+        android:layout_alignParentBottom="true"
+        android:minHeight="120px"
+        android:background="#86d8f8"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Details"
+        android:id="@+id/button"
+        android:layout_alignTop="@+id/loginSpace"
+        android:layout_alignEnd="@+id/loginSpace"
+        android:textSize="25px" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="         John Doe"
+        android:paddingTop="10px"
+        android:id="@+id/textView"
+        android:layout_alignTop="@+id/loginSpace"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="         Account Balance: $125"
+        android:paddingBottom="10px"
+        android:id="@+id/textView2"
+        android:layout_alignBottom="@+id/loginSpace"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchSpace"
+        android:minHeight="600px"
+        android:background="#86d8f8"
+        android:layout_above="@+id/padding"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_above="@+id/loginSpace"
+        android:layout_alignParentStart="true"
+        android:minHeight="10px"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/padding" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Broadcaster by name / keyword"
+        android:id="@+id/textView3"
+        android:textSize="30px"
+        android:layout_alignTop="@+id/searchSpace"
+        android:layout_alignParentStart="true"
+        android:paddingTop="15px"
+        android:paddingLeft="15px" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:hint = "Search in broadcasters"
+        android:textSize="40px"
+        android:layout_below="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3"
+        android:background="#ffffff" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:id="@+id/button2"
+        android:layout_toEndOf="@+id/editText"
+        android:layout_alignTop="@id/editText"
+        android:textSize="30px"
+        android:minWidth="0dp"
+        android:minHeight="0dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Available Broadcasters"
+        android:id="@+id/textView4"
+        android:layout_alignTop="@+id/searchSpace"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="15px"
+        android:paddingRight="80px"
+        android:textSize="30px" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/textView4"
+        android:layout_toEndOf="@+id/button2"
+        android:spinnerMode="dropdown"
+        android:background="#ffffff" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/button2"
+        android:background="#ffffff"
+        android:lines="3"
+        android:text="Bio"
+        android:textSize="40px"
+        android:minWidth="900px"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="15px"
+        android:paddingRight="15px" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:background="#ffffff"
+        android:lines="3"
+        android:text="Schedule"
+        android:textSize="40px"
+        android:minWidth="900px"
+        android:paddingLeft="15px"
+        android:paddingRight="15px"
+        android:layout_below="@+id/padding2"
+        android:layout_centerHorizontal="true" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:minHeight="10px"
+        android:id="@+id/padding2"
+        android:layout_below="@+id/editText2"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Join Broadcast Now"
+        android:id="@+id/button3"
+        android:layout_below="@+id/editText3"
+        android:layout_alignEnd="@+id/editText3"
+        android:textSize="30px"
+        android:minHeight="0dp"
+        android:minWidth="0dp" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:minHeight="10px"
+        android:id="@+id/spaceAboveSearchSpace"
+        android:layout_above="@+id/searchSpace"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:minHeight="200px"
+        android:background="#86d8f8"
+        android:layout_above="@+id/spaceAboveSearchSpace"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"/>
+</RelativeLayout>
