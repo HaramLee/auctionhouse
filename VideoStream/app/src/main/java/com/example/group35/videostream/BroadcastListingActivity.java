@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class BroadcastListingActivity extends AppCompatActivity {
 
     protected ArrayList<String> broadcasts;
+   // protected ArrayList<Integer> images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +35,44 @@ public class BroadcastListingActivity extends AppCompatActivity {
         broadcasts.add("Broadcast 10");
         broadcasts.add("Broadcast 11");
 
-        ArrayAdapter<String> itemsAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, broadcasts);
-        ListView listView = (ListView) findViewById(R.id.broadcastListView);
-        listView.setAdapter(itemsAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        String[] itemname ={
+                "Broadcast 1",
+                "Broadcast 2",
+                "Broadcast 3",
+                "Broadcast 4",
+                "Broadcast 5",
+                "Broadcast 6",
+                "Broadcast 7",
+                "Broadcast 8 "
+        };
+
+        //images = new ArrayList<Integer>();
+        //images.add(R.drawable.ic_launcher);
+
+        Integer[] imgid={
+                R.drawable.ic_launcher,
+
+        };
+
+//        ArrayAdapter<String> itemsAdapter =
+//                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, broadcasts);
+//        ListView listView = (ListView) findViewById(R.id.broadcastListView);
+//        listView.setAdapter(itemsAdapter);
+
+        ListView list;
+        CustomListAdapter adapter=new CustomListAdapter(this, itemname,imgid );
+        list=(ListView)findViewById(R.id.broadcastListView);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(BroadcastListingActivity.this, broadcasts.get(position).toString() + " selected.",
-                               Toast.LENGTH_LONG).show();
+//                Toast.makeText(BroadcastListingActivity.this, broadcasts.get(position).toString() + " selected.",
+//                               Toast.LENGTH_LONG).show();
+
+
+                startActivity(new Intent(BroadcastListingActivity.this, Layout.class));
+
             }
         });
     }

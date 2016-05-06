@@ -30,8 +30,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
 //        playerStateChangeListener = new MyPlayerStateChangeListener();
 //        playbackEventListener = new MyPlaybackEventListener();
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+//        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+//        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
 //        final EditText seekToText = (EditText) findViewById(R.id.seek_to_text);
 //        Button seekToButton = (Button) findViewById(R.id.seek_to_button);
@@ -42,6 +42,16 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 //                player.seekToMillis(skipToSecs * 1000);
 //            }
 //        });
+
+        Button btn = (Button)findViewById(R.id.sign_in);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BroadcastListingActivity.class));
+            }
+        });
+
     }
 
     @Override

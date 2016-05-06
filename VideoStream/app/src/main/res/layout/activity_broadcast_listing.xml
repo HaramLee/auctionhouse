@@ -13,15 +13,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/broadcastListView"
-        android:layout_above="@+id/paymentDetailsButton"
-        android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Payment Details"
-        android:id="@+id/paymentDetailsButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="onPaymentDetails" />
+        android:layout_alignParentEnd="true"/>
+    <!--android:layout_above="@+id/paymentDetailsButton"-->
+
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Payment Details"-->
+        <!--android:id="@+id/paymentDetailsButton"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:onClick="onPaymentDetails" />-->
 </RelativeLayout>

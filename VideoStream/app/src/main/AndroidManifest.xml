@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".BroadcastListingActivity"></activity>
+        <activity android:name=".Layout"></activity>
     </application>
 
 </manifest>

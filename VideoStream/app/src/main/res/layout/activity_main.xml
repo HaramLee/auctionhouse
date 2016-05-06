@@ -8,104 +8,92 @@
 
 
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:id="@+id/youtube_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
     <!-- You could put anything here -->
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
 
-        <TableRow
-            android:gravity="center"
-            >
+        <TableRow>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="8dp"
-                android:text="The Auction Item: "
-                android:textSize="18sp"
-                />
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
+        </TableRow>
+        <TableRow>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="name"
-                android:textSize="18sp"
-                android:id="@+id/textView1"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
 
         </TableRow>
 
-
-        <TableRow
-            android:gravity="center"
-            >
-
+        <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
+                android:gravity="end"
                 android:padding="8dp"
-                android:text="Current BID: "
-                android:textSize="18sp"
-              />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="18sp"
-                android:id="@+id/textView"/>
-
-        </TableRow>
-
-
-        <TableRow
-            android:gravity="center"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:padding="8dp"
-                android:text="Minimum BID: "
-                android:textSize="18sp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="18sp"
-                android:id="@+id/textView2"/>
-
-        </TableRow>
-
-        <TableRow
-            android:gravity="center"
-            >
-
+                android:text="ID: "
+                android:textSize="18sp" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText" />
+                android:text="Enter ID"
+
+                android:textSize="18sp"
+                android:id="@+id/id"/>
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:padding="8dp"
+                android:text="Password: "
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="18sp"
+                android:id="@+id/password"/>
+
+        </TableRow>
+
+
+
+
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TableRow
+            android:gravity="center"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign In"
+                android:id="@+id/sign_in" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BID"
-                android:id="@+id/button" />
-
+                android:text="Sign Up"
+                android:id="@+id/sign_up" />
         </TableRow>
-
     </TableLayout>
-
-
 
 
     <!--<LinearLayout-->
