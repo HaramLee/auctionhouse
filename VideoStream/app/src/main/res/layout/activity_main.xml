@@ -19,26 +19,89 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TableRow>
+        <TableRow
+            android:gravity="center"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="right"
                 android:padding="8dp"
-                android:text="Current BID: "
-                android:textSize="18sp" />
+                android:text="The Auction Item: "
+                android:textSize="18sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
+                android:text="name"
+                android:textSize="18sp"
+                android:id="@+id/textView1"/>
+
+        </TableRow>
+
+
+        <TableRow
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="Current BID: "
+                android:textSize="18sp"
+              />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
                 android:textSize="18sp"
                 android:id="@+id/textView"/>
 
         </TableRow>
 
 
+        <TableRow
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="8dp"
+                android:text="Minimum BID: "
+                android:textSize="18sp"
+                />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="18sp"
+                android:id="@+id/textView2"/>
+
+        </TableRow>
+
+        <TableRow
+            android:gravity="center"
+            >
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BID"
+                android:id="@+id/button" />
+
+        </TableRow>
 
     </TableLayout>
 
