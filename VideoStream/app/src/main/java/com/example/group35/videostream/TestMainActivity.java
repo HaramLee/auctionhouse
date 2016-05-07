@@ -38,16 +38,16 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
         spinnerArray.add("item2");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item, spinnerArray);
+                this, R.layout.spinner_item, spinnerArray);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         Spinner sItems = (Spinner) findViewById(R.id.spinner);
         sItems.setAdapter(adapter);
 
 //        playerStateChangeListener = new MyPlayerStateChangeListener();
 //        playbackEventListener = new MyPlaybackEventListener();
-//        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-//        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+//          youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+//          youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
 //        final EditText seekToText = (EditText) findViewById(R.id.seek_to_text);
 //        Button seekToButton = (Button) findViewById(R.id.seek_to_button);
