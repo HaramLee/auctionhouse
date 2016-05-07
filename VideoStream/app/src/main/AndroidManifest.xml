@@ -20,7 +20,9 @@
         <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".BroadcastListingActivity" />
         <activity android:name=".Layout" />
-        <activity android:name=".TestMainActivity"></activity>
+        <activity android:name=".TestMainActivity" />
+        <activity android:name=".TestMainActivity3" />
+        <activity android:name=".TestMainActivity2"></activity>
     </application>
 
 </manifest>

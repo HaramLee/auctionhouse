@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.group35.videostream.TestMainActivity">
+    tools:context="com.example.group35.videostream.TestMainActivity2">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Join Broadcast Now"
+        android:text="Stop Broadcast"
         android:id="@+id/button3"
         android:layout_below="@+id/editText3"
         android:layout_alignEnd="@+id/editText3"
@@ -365,6 +365,17 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Broadcast"
+        android:id="@+id/button14"
+        android:textSize="30px"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:layout_below="@+id/editText3"
+        android:layout_alignStart="@+id/editText3" />
 
 
 </RelativeLayout>
