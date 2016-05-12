@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login / Sign Up"
-        android:id="@+id/button"
+        android:id="@+id/sign_in_register"
         android:layout_alignTop="@+id/loginSpace"
         android:layout_alignEnd="@+id/loginSpace"
         android:textSize="25px" />
@@ -343,16 +343,18 @@
         android:id="@+id/vidControlPadding"
         android:minHeight="10px" />
 
-    <ImageView
+    <com.google.android.youtube.player.YouTubePlayerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/videoSpace"
+        android:id="@+id/youtube_view"
         android:minHeight="120px"
         android:background="#86d8f8"
         android:layout_above="@+id/vidControlPadding"
         android:layout_alignStart="@+id/controlSpace"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true">
+    </com.google.android.youtube.player.YouTubePlayerView>
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -370,18 +372,20 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Password:"
-        android:id="@+id/textView10"
+        android:id="@+id/email"
         android:layout_alignTop="@+id/loginSpace"
         android:layout_toEndOf="@+id/editText" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
+        android:id="@+id/password"
         android:hint="Password"
         android:background="#ffffff"
-        android:layout_below="@+id/textView10"
-        android:layout_alignStart="@+id/textView10" />
+        android:layout_below="@+id/email"
+        android:layout_alignStart="@+id/email" />
+
+
 
 
 </RelativeLayout>

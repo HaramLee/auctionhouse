@@ -41,21 +41,6 @@ public class TestMainActivity3 extends YouTubeBaseActivity implements YouTubePla
         Spinner sItems = (Spinner) findViewById(R.id.spinner);
         sItems.setAdapter(adapter);
 
-//        playerStateChangeListener = new MyPlayerStateChangeListener();
-//        playbackEventListener = new MyPlaybackEventListener();
-//          youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-//          youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
-
-//        final EditText seekToText = (EditText) findViewById(R.id.seek_to_text);
-//        Button seekToButton = (Button) findViewById(R.id.seek_to_button);
-//        seekToButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int skipToSecs = Integer.valueOf(seekToText.getText().toString());
-//                player.seekToMillis(skipToSecs * 1000);
-//            }
-//        });
-
     }
 
     @Override

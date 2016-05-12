@@ -5,50 +5,112 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-//    private MyPlayerStateChangeListener playerStateChangeListener;
-//    private MyPlaybackEventListener playbackEventListener;
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
     private YouTubePlayer player;
 
+    private EditText password;
+    private TextView email;
+    private Button sign_in_register;
+    private RequestQueue requestQueue;
+    private static final String URL = "http://note2myself.cu.ma/broadcast_control.php";
+    private StringRequest request;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test_main3);
 
-//        playerStateChangeListener = new MyPlayerStateChangeListener();
-//        playbackEventListener = new MyPlaybackEventListener();
-//        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-//        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
-//        final EditText seekToText = (EditText) findViewById(R.id.seek_to_text);
-//        Button seekToButton = (Button) findViewById(R.id.seek_to_button);
-//        seekToButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int skipToSecs = Integer.valueOf(seekToText.getText().toString());
-//                player.seekToMillis(skipToSecs * 1000);
-//            }
-//        });
+        List<String> spinnerArray =  new ArrayList<String>();
+        spinnerArray.add("First Baptist Church");
+        spinnerArray.add("item2");
 
-        Button btn = (Button)findViewById(R.id.sign_in);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, R.layout.spinner_item, spinnerArray);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        Spinner sItems = (Spinner) findViewById(R.id.spinner);
+        sItems.setAdapter(adapter);
+
+        email = (TextView) findViewById(R.id.email);
+        password = (EditText) findViewById(R.id.password);
+        sign_in_register = (Button) findViewById(R.id.sign_in_register);
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        sign_in_register.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BroadcastListingActivity.class));
+            public void onClick(View view) {
+
+                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (jsonObject.names().get(0).equals("success")) {
+                                Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        HashMap<String, String> hashMap = new HashMap<String, String>();
+                        hashMap.put("email", email.getText().toString());
+                        hashMap.put("password", password.getText().toString());
+
+                        return hashMap;
+                    }
+                };
+
+                requestQueue.add(request);
             }
         });
 
@@ -56,10 +118,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
     @Override
     public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
-//        player.setPlayerStateChangeListener(playerStateChangeListener);
-//        player.setPlaybackEventListener(playbackEventListener);
+
         this.player = player;
-        String mVideoId = "r_KlltnQJbQ";
+        String mVideoId = "6iJu_smJW-o";
 
         if (mVideoId != null) {
             if (wasRestored) {
@@ -122,76 +183,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
         return super.onOptionsItemSelected(item);
     }
-//
-//    private void showMessage(String message) {
-//        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//    }
-//
-//    private final class MyPlaybackEventListener implements YouTubePlayer.PlaybackEventListener {
-//
-//        @Override
-//        public void onPlaying() {
-//            // Called when playback starts, either due to user action or call to play().
-//            showMessage("Playing");
-//        }
-//
-//        @Override
-//        public void onPaused() {
-//            // Called when playback is paused, either due to user action or call to pause().
-//            showMessage("Paused");
-//        }
-//
-//        @Override
-//        public void onStopped() {
-//            // Called when playback stops for a reason other than being paused.
-//            showMessage("Stopped");
-//        }
-//
-//        @Override
-//        public void onBuffering(boolean b) {
-//            // Called when buffering starts or ends.
-//        }
-//
-//        @Override
-//        public void onSeekTo(int i) {
-//            // Called when a jump in playback position occurs, either
-//            // due to user scrubbing or call to seekRelativeMillis() or seekToMillis()
-//        }
-//    }
-//
-//    private final class MyPlayerStateChangeListener implements YouTubePlayer.PlayerStateChangeListener {
-//
-//        @Override
-//        public void onLoading() {
-//            // Called when the player is loading a video
-//            // At this point, it's not ready to accept commands affecting playback such as play() or pause()
-//        }
-//
-//        @Override
-//        public void onLoaded(String s) {
-//            // Called when a video is done loading.
-//            // Playback methods such as play(), pause() or seekToMillis(int) may be called after this callback.
-//        }
-//
-//        @Override
-//        public void onAdStarted() {
-//            // Called when playback of an advertisement starts.
-//        }
-//
-//        @Override
-//        public void onVideoStarted() {
-//            // Called when playback of the video starts.
-//        }
-//
-//        @Override
-//        public void onVideoEnded() {
-//            // Called when the video reaches its end.
-//        }
-//
-//        @Override
-//        public void onError(YouTubePlayer.ErrorReason errorReason) {
-//            // Called when an error occurs.
-//        }
-//    }
+
 }
 

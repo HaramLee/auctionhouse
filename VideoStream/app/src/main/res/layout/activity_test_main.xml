@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.group35.videostream.TestMainActivity">
 
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Payment Details"
-        android:id="@+id/button"
+        android:id="@+id/button_payment"
         android:layout_alignTop="@+id/loginSpace"
         android:layout_alignEnd="@+id/loginSpace"
         android:textSize="25px" />
@@ -354,17 +356,16 @@
         android:id="@+id/vidControlPadding"
         android:minHeight="10px" />
 
-    <ImageView
+    <com.google.android.youtube.player.YouTubePlayerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/videoSpace"
+        android:id="@+id/youtube_view"
         android:minHeight="120px"
         android:background="#86d8f8"
         android:layout_above="@+id/vidControlPadding"
         android:layout_alignStart="@+id/controlSpace"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
-
-
+        android:layout_alignParentTop="true">
+    </com.google.android.youtube.player.YouTubePlayerView>
 
 </RelativeLayout>
