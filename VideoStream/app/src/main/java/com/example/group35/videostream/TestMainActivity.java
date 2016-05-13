@@ -56,6 +56,8 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
     private String currentYoutubeID = "6iJu_smJW-o"; //default vid
 
     private static final String URL = "http://note2myself.cu.ma/broadcast_control.php";
+    private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
+    private static final String GET_BROADCASTS = "getBroadcasts";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,7 +196,16 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", GET_BROADCASTS);
+
+                return hashMap;
+            }
+        };
 
         requestQueue.add(request);
     }
