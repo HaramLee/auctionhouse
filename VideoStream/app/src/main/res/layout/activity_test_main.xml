@@ -80,7 +80,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/filterBroadcastEditText"
         android:hint = "Search in broadcasters"
         android:textSize="40px"
         android:layout_below="@+id/textView3"
@@ -93,11 +93,12 @@
         android:layout_height="wrap_content"
         android:text="Filter"
         android:id="@+id/button2"
-        android:layout_toEndOf="@+id/editText"
-        android:layout_alignTop="@id/editText"
+        android:layout_toEndOf="@+id/filterBroadcastEditText"
+        android:layout_alignTop="@id/filterBroadcastEditText"
         android:textSize="30px"
         android:minWidth="0dp"
-        android:minHeight="0dp" />
+        android:minHeight="0dp"
+        android:onClick="onFilter" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -126,17 +127,17 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="First Baptist Church:"
-        android:id="@+id/textView9"
+        android:id="@+id/broadcastNameView"
         android:layout_below="@+id/button2"
-        android:layout_alignStart="@+id/editText2"
+        android:layout_alignStart="@+id/bioEditText"
         android:textSize="40px" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:inputType="none"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/bioEditText"
         android:layout_below="@+id/button2"
         android:background="#ffffff"
         android:lines="3"
@@ -146,14 +147,16 @@
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:paddingLeft="15px"
-        android:paddingRight="15px" />
+        android:paddingRight="15px"
+        android:editable="false"
+        />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
+        android:inputType="none"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/scheduleEditText"
         android:background="#ffffff"
         android:lines="3"
         android:text="Schedule"
@@ -162,14 +165,16 @@
         android:paddingLeft="15px"
         android:paddingRight="15px"
         android:layout_below="@+id/padding2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:editable="false"
+        />
 
     <Space
         android:layout_width="20px"
         android:layout_height="20px"
         android:minHeight="10px"
         android:id="@+id/padding2"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/bioEditText"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -178,11 +183,12 @@
         android:layout_height="wrap_content"
         android:text="Join Broadcast Now"
         android:id="@+id/button3"
-        android:layout_below="@+id/editText3"
-        android:layout_alignEnd="@+id/editText3"
+        android:layout_below="@+id/scheduleEditText"
+        android:layout_alignEnd="@+id/scheduleEditText"
         android:textSize="30px"
         android:minHeight="0dp"
-        android:minWidth="0dp" />
+        android:minWidth="0dp"
+        android:onClick="onJoinBroadcast" />
 
     <Space
         android:layout_width="20px"
@@ -209,7 +215,7 @@
         android:text="1"
         android:id="@+id/button4"
         android:layout_alignBottom="@+id/controlSpace"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignStart="@+id/filterBroadcastEditText"
         android:minHeight="0dp"
         android:minWidth="0dp" />
 
