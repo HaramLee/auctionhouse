@@ -359,7 +359,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
+        android:id="@+id/emailEditText"
         android:hint="Username"
         android:background="#ffffff"
         android:layout_alignParentBottom="true"
@@ -379,7 +379,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
+        android:id="@+id/passwordEditText"
         android:hint="Password"
         android:background="#ffffff"
         android:layout_below="@+id/email"

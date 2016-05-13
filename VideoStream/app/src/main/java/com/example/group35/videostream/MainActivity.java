@@ -40,10 +40,10 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     private YouTubePlayer player;
 
     private EditText password;
-    private TextView email;
+    private EditText email;
     private Button sign_in_register;
     private RequestQueue requestQueue;
-    private static final String URL = "http://note2myself.cu.ma/broadcast_control.php";
+    private static final String URL = "http://note2myself.cu.ma/user_control.php";
     private StringRequest request;
 
 
@@ -66,8 +66,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         Spinner sItems = (Spinner) findViewById(R.id.spinner);
         sItems.setAdapter(adapter);
 
-        email = (TextView) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
+        email = (EditText) findViewById(R.id.emailEditText);
+        password = (EditText) findViewById(R.id.passwordEditText);
         sign_in_register = (Button) findViewById(R.id.sign_in_register);
 
         requestQueue = Volley.newRequestQueue(this);

@@ -53,7 +53,7 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
     private EditText scheduleEditText;
     private EditText filterEditText;
 
-    private String currentYoutubeID;
+    private String currentYoutubeID = "6iJu_smJW-o"; //default vid
 
     private static final String URL = "http://note2myself.cu.ma/broadcast_control.php";
 
@@ -63,6 +63,8 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
         setContentView(R.layout.activity_test_main);
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+
         broadcastNameTextView = (TextView) findViewById(R.id.broadcastNameView);
         bioEditText = (EditText) findViewById(R.id.bioEditText);
         scheduleEditText = (EditText) findViewById(R.id.scheduleEditText);
@@ -78,7 +80,6 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), PaymentDetailsActivity.class));
-                //getAvailableBroadcasts();
             }
 
         });
@@ -217,7 +218,7 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
      * @param view
      */
     public void onJoinBroadcast(final View view) {
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        player.loadVideo(currentYoutubeID);
     }
 
     /**
