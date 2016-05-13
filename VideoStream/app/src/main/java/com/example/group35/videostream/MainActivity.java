@@ -43,8 +43,11 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     private EditText email;
     private Button sign_in_register;
     private RequestQueue requestQueue;
-    private static final String URL = "http://note2myself.cu.ma/user_control.php";
     private StringRequest request;
+
+    private static final String URL = "http://note2myself.cu.ma/user_control.php";
+    private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
+    private static final String USER_LOGIN = "login";
 
 
     @Override
@@ -82,10 +85,10 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.names().get(0).equals("success")) {
-                                Toast.makeText(getApplicationContext(), "SUCCESS " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
                             } else {
-                                Toast.makeText(getApplicationContext(), "Error" + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Error: " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -103,6 +106,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         HashMap<String, String> hashMap = new HashMap<String, String>();
+                        hashMap.put("db_query_password", DB_QUERY_PASSWORD);
+                        hashMap.put("db_query_type", USER_LOGIN);
                         hashMap.put("email", email.getText().toString());
                         hashMap.put("password", password.getText().toString());
 
