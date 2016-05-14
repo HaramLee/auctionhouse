@@ -1,6 +1,7 @@
 package com.example.group35.videostream;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +46,11 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     private RequestQueue requestQueue;
     private StringRequest request;
 
+    public static SharedPreferences mPreferences;
+    public static String name;
+    public static String isViewer;
+    public static String balance;
+
     private static final String URL = "http://note2myself.cu.ma/user_control.php";
     private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     private static final String USER_LOGIN = "login";
@@ -54,6 +60,11 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_main3);
+
+//        if (mPreferences.contains("username")) {
+//            // start Main activity
+//            startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+//        }
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
@@ -85,6 +96,16 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.names().get(0).equals("success")) {
+
+//                                mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+//                                SharedPreferences.Editor editor = mPreferences.edit();
+//                                editor.putString("username", jsonObject.getString("username"));
+//                                editor.commit();
+
+                                name = jsonObject.getString("username");
+                                isViewer = jsonObject.getString("isViewer");
+                                balance = jsonObject.getString("accountBalance");
+
                                 Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
                             } else {

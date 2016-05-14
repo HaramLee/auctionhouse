@@ -22,7 +22,8 @@
         android:id="@+id/button"
         android:layout_alignTop="@+id/loginSpace"
         android:layout_alignEnd="@+id/loginSpace"
-        android:textSize="25px" />
+        android:textSize="25px"
+        android:layout_toEndOf="@+id/textView8" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -377,6 +378,15 @@
         android:minWidth="0dp"
         android:layout_below="@+id/scheduleEditText"
         android:layout_alignStart="@+id/scheduleEditText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:id="@+id/logout_but"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toStartOf="@+id/button"
+        android:layout_alignTop="@+id/loginSpace" />
 
 
 </RelativeLayout>

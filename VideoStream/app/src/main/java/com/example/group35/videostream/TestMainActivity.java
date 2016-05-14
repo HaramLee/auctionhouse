@@ -1,6 +1,7 @@
 package com.example.group35.videostream;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,11 +54,17 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
     private EditText scheduleEditText;
     private EditText filterEditText;
 
+
+    private TextView balanceText;
+    private TextView nameText;
+
     private String currentYoutubeID = "6iJu_smJW-o"; //default vid
 
     private static final String URL = "http://note2myself.cu.ma/broadcast_control.php";
     private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     private static final String GET_BROADCASTS = "getBroadcasts";
+
+    private Button logout_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +93,24 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
 
         });
 
+        logout_button = (Button) findViewById(R.id.logout_but);
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = MainActivity.mPreferences.edit();
+                editor.clear();   // This will delete all your preferences, check how to delete just one
+                editor.commit();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+
+        });
+
+        balanceText = (TextView) findViewById(R.id.textView2);
+        balanceText.setText(MainActivity.balance);
+
+        nameText = (TextView) findViewById(R.id.textView);
+        nameText.setText(MainActivity.name);
     }
 
     @Override
