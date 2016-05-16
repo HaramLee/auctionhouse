@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Payment Details"
-        android:id="@+id/button"
+        android:id="@+id/button_payment"
         android:layout_alignTop="@+id/loginSpace"
         android:layout_alignEnd="@+id/loginSpace"
         android:textSize="25px"
@@ -384,8 +384,8 @@
         android:layout_height="wrap_content"
         android:text="Logout"
         android:id="@+id/logout_but"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toStartOf="@+id/button"
+        android:layout_alignBottom="@+id/button_payment"
+        android:layout_toStartOf="@+id/button_payment"
         android:layout_alignTop="@+id/loginSpace" />
 
 

@@ -1,6 +1,7 @@
 package com.example.group35.videostream;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -22,6 +24,12 @@ import java.util.List;
 
 public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
+
+    private TextView balanceText;
+    private TextView nameText;
+
+    private Button payment_button;
+    private Button logout_button;
 
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
@@ -42,6 +50,36 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
         adapter.setDropDownViewResource(R.layout.spinner_item);
         Spinner sItems = (Spinner) findViewById(R.id.spinner);
         sItems.setAdapter(adapter);
+
+
+
+        payment_button = (Button) findViewById(R.id.button_payment);
+        payment_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PaymentDetailsActivity.class));
+            }
+
+        });
+
+        logout_button = (Button) findViewById(R.id.logout_but);
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = MainActivity.mPreferences.edit();
+                editor.clear();   // This will delete all your preferences, check how to delete just one
+                editor.commit();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+
+        });
+
+        balanceText = (TextView) findViewById(R.id.textView2);
+        balanceText.setText(MainActivity.balance);
+
+        nameText = (TextView) findViewById(R.id.textView);
+        nameText.setText(MainActivity.name);
 
     }
 

@@ -1,8 +1,10 @@
 package com.example.group35.videostream;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +57,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     private static final String USER_LOGIN = "login";
 
+    static final String KEY_USERNAME = "login_name";
+    static final String KEY_PASSWORD = "login_password";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +101,36 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                             if (jsonObject.names().get(0).equals("success")) {
 
                                 editor.putString("username", "key");
-                                editor.commit();
+
 
                                 name = jsonObject.getString("username");
                                 isViewer = jsonObject.getString("isViewer");
                                 balance = jsonObject.getString("accountBalance");
 
+                                final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
+                                        R.style.AppTheme_Dark_Dialog);
+
+                                progressDialog.setIndeterminate(true);
+                                progressDialog.setMessage("Authenticating...");
+                                progressDialog.show();
+
+                                String emailSave = email.getText().toString();
+                                String passwordSave = password.getText().toString();
+
+                                editor.putString(KEY_USERNAME, emailSave);
+                                editor.putString(KEY_PASSWORD, passwordSave);
+                                editor.commit();
+
+                                // TODO: Implement your own authentication logic here.
+
+                                new android.os.Handler().postDelayed(
+                                        new Runnable() {
+                                            public void run() {
+                                                // On complete call either onLoginSuccess or onLoginFailed
+                                                // onLoginFailed();
+                                                progressDialog.dismiss();
+                                            }
+                                        }, 5000);
 
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
@@ -145,11 +174,18 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
         if (mPreferences.contains("username")) {
             // start Main activity
-            getAvailableBroadcasts();
+
+            String _username = mPreferences.getString(KEY_USERNAME, "");
+            String _password = mPreferences.getString(KEY_PASSWORD, ""); //return nothing if no pass saved
+            email.setText(_username);
+            password.setText(_password);
+            auto_login_user();
+
         }
     }
 
-    public void getAvailableBroadcasts(){
+
+    public void auto_login_user(){
 
         requestQueue = Volley.newRequestQueue(this);
         request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -163,8 +199,30 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                         isViewer = jsonObject.getString("isViewer");
                         balance = jsonObject.getString("accountBalance");
 
-                        Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+                        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
+                                R.style.AppTheme_Dark_Dialog);
+
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.setMessage("Authenticating...");
+                        progressDialog.show();
+
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        // On complete call either onLoginSuccess or onLoginFailed
+                                        // onLoginFailed();
+                                        progressDialog.dismiss();
+                                    }
+                                }, 1000);
+
+                        if(jsonObject.getInt("isViewer")== 0){
+                            Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), TestMainActivity2.class));
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+                        }
+
                     } else {
                         Toast.makeText(getApplicationContext(), "Error: " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                     }
@@ -209,15 +267,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                 player.loadVideo(mVideoId);
             }
         }
-
-
-//        if (!wasRestored) {
-//            player.cueVideo("vtg4o__aRMg"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
-//        } else if (wasRestored) {
-//            player.play();
-//        } else {
-//            player.loadVideo("vtg4o__aRMg");
-//        }
     }
 
     @Override
