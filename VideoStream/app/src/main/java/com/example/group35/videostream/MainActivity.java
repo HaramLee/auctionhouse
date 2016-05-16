@@ -51,11 +51,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public static String isViewer;
     public static String balance;
 
-    private static final String URL = "http://mattu.5gbfree.com/user_control.php";
-    private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
-    private static final String USER_LOGIN = "login";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +60,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
         List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("First Baptist Church");
-        spinnerArray.add("item2");
+        spinnerArray.add("Login to view");
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this, R.layout.spinner_item, spinnerArray);
@@ -88,7 +83,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             @Override
             public void onClick(View view) {
 
-                request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                request = new StringRequest(Request.Method.POST, Config.DB_USER_CONTROL_URL, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
@@ -101,7 +96,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                 name = jsonObject.getString("username");
                                 isViewer = jsonObject.getString("isViewer");
                                 balance = jsonObject.getString("accountBalance");
-
 
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
@@ -130,8 +124,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         HashMap<String, String> hashMap = new HashMap<String, String>();
-                        hashMap.put("db_query_password", DB_QUERY_PASSWORD);
-                        hashMap.put("db_query_type", USER_LOGIN);
+                        hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                        hashMap.put("db_query_type", Config.DB_QUERY_TYPE_USER_LOGIN);
                         hashMap.put("email", email.getText().toString());
                         hashMap.put("password", password.getText().toString());
 
@@ -152,7 +146,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public void getAvailableBroadcasts(){
 
         requestQueue = Volley.newRequestQueue(this);
-        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.POST, Config.DB_USER_CONTROL_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -184,8 +178,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<String, String>();
-                hashMap.put("db_query_password", DB_QUERY_PASSWORD);
-                hashMap.put("db_query_type", USER_LOGIN);
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_USER_LOGIN);
                 hashMap.put("email", email.getText().toString());
                 hashMap.put("password", password.getText().toString());
 
@@ -200,7 +194,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
 
         this.player = player;
-        String mVideoId = "6iJu_smJW-o";
+        String mVideoId = Config.DEFAULT_VIDEO;
 
         if (mVideoId != null) {
             if (wasRestored) {
@@ -262,6 +256,14 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * When you click any of the PTZ Controls (Unavailable Feature)
+     * @param view
+     */
+    public void onPTZClick(final View view) {
+        Toast.makeText(this, "This feature is currently unavailable.", Toast.LENGTH_SHORT).show();
     }
 
 }

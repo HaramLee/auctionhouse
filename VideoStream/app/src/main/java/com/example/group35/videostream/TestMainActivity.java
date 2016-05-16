@@ -42,10 +42,11 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
     private YouTubePlayer player;
-    private Button payment_button;
+    private String currentYoutubeID;
 
     private RequestQueue requestQueue;
     private StringRequest request;
+
     private List<String> spinnerArray;
     private List<Broadcast> broadcasts;
 
@@ -54,23 +55,18 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
     private EditText scheduleEditText;
     private EditText filterEditText;
 
-
     private TextView balanceText;
     private TextView nameText;
 
-    private String currentYoutubeID = "6iJu_smJW-o"; //default vid
-
-    private static final String URL = "http://mattu.5gbfree.com/broadcast_control.php";
-    private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
-    private static final String GET_BROADCASTS = "getBroadcasts";
-
     private Button logout_button;
+    private Button payment_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_main);
 
+        currentYoutubeID = Config.DEFAULT_VIDEO;
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
@@ -177,7 +173,7 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
 
         requestQueue = Volley.newRequestQueue(this);
 
-        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+        request = new StringRequest(Request.Method.POST, Config.DB_BROADCAST_CONTROL_URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -225,8 +221,8 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<String, String>();
-                hashMap.put("db_query_password", DB_QUERY_PASSWORD);
-                hashMap.put("db_query_type", GET_BROADCASTS);
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_GET_BROADCASTS);
 
                 return hashMap;
             }
@@ -291,8 +287,8 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 //Toast.makeText(TestMainActivity.this, spinnerArray.get(position).toString(), Toast.LENGTH_LONG).show();
 
-                for(Broadcast a: broadcasts) {
-                    if(a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
+                for (Broadcast a : broadcasts) {
+                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
                         broadcastNameTextView.setText(a.getBroadcastName());
                         bioEditText.setText(a.getBio());
                         scheduleEditText.setText(a.getSchedule());
@@ -310,6 +306,14 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
         });
 
         sItems.setAdapter(adapter);
+    }
+
+    /**
+     * When you click any of the PTZ Controls (Unavailable Feature)
+     * @param view
+     */
+    public void onPTZClick(final View view) {
+        Toast.makeText(this, "This feature is currently unavailable.", Toast.LENGTH_SHORT).show();
     }
 
 }
