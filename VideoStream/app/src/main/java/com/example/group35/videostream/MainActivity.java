@@ -102,8 +102,15 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                 isViewer = jsonObject.getString("isViewer");
                                 balance = jsonObject.getString("accountBalance");
 
-                                Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+
+                                if(jsonObject.getInt("isViewer")== 0){
+                                    Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), TestMainActivity2.class));
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+                                }
+
                             } else {
                                 Toast.makeText(getApplicationContext(), "Error: " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                             }

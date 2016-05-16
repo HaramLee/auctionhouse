@@ -21,9 +21,11 @@
         <activity android:name=".PaymentDetailsActivity" />
         <activity android:name=".BroadcastListingActivity" />
         <activity android:name=".Layout" />
-        <activity android:name=".TestMainActivity" />
+        <activity android:name=".TestMainActivity"
+            android:noHistory="true"/>
         <activity android:name=".TestMainActivity3" />
-        <activity android:name=".TestMainActivity2"></activity>
+        <activity android:name=".TestMainActivity2"
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>
