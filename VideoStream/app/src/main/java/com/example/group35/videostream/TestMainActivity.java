@@ -60,7 +60,7 @@ public class TestMainActivity extends YouTubeBaseActivity implements YouTubePlay
 
     private String currentYoutubeID = "6iJu_smJW-o"; //default vid
 
-    private static final String URL = "http://note2myself.cu.ma/broadcast_control.php";
+    private static final String URL = "http://mattu.5gbfree.com/broadcast_control.php";
     private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     private static final String GET_BROADCASTS = "getBroadcasts";
 

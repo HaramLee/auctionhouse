@@ -51,7 +51,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public static String isViewer;
     public static String balance;
 
-    private static final String URL = "http://note2myself.cu.ma/user_control.php";
+    private static final String URL = "http://mattu.5gbfree.com/user_control.php";
     private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     private static final String USER_LOGIN = "login";
 
@@ -60,11 +60,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_main3);
-
-//        if (mPreferences.contains("username")) {
-//            // start Main activity
-//            startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
-//        }
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
@@ -86,6 +81,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
         requestQueue = Volley.newRequestQueue(this);
 
+        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = mPreferences.edit();
+
         sign_in_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,10 +95,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.names().get(0).equals("success")) {
 
-//                                mPreferences = getSharedPreferences("User", MODE_PRIVATE);
-//                                SharedPreferences.Editor editor = mPreferences.edit();
-//                                editor.putString("username", jsonObject.getString("username"));
-//                                editor.commit();
+                                editor.putString("username", "key");
+                                editor.commit();
 
                                 name = jsonObject.getString("username");
                                 isViewer = jsonObject.getString("isViewer");
@@ -140,7 +136,58 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             }
         });
 
+        if (mPreferences.contains("username")) {
+            // start Main activity
+            getAvailableBroadcasts();
+        }
     }
+
+    public void getAvailableBroadcasts(){
+
+        requestQueue = Volley.newRequestQueue(this);
+        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.names().get(0).equals("success")) {
+
+                        name = jsonObject.getString("username");
+                        isViewer = jsonObject.getString("isViewer");
+                        balance = jsonObject.getString("accountBalance");
+
+                        Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), TestMainActivity.class));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error: " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", USER_LOGIN);
+                hashMap.put("email", email.getText().toString());
+                hashMap.put("password", password.getText().toString());
+
+                return hashMap;
+            }
+        };
+        requestQueue.add(request);
+    }
+
 
     @Override
     public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
