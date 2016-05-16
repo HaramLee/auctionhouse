@@ -53,17 +53,10 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public static String isViewer;
     public static String balance;
 
-<<<<<<< HEAD
-    private static final String URL = "http://mattu.5gbfree.com/user_control.php";
-    private static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
-    private static final String USER_LOGIN = "login";
-
     static final String KEY_USERNAME = "login_name";
     static final String KEY_PASSWORD = "login_password";
 
 
-=======
->>>>>>> 49b1296ca7dd1d2df3c26d41766d3181c9811163
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +103,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                 isViewer = jsonObject.getString("isViewer");
                                 balance = jsonObject.getString("accountBalance");
 
-<<<<<<< HEAD
                                 final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
                                         R.style.AppTheme_Dark_Dialog);
 
@@ -136,8 +128,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                             }
                                         }, 5000);
 
-=======
->>>>>>> 49b1296ca7dd1d2df3c26d41766d3181c9811163
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), TestMainActivity2.class));
