@@ -112,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="First Baptist Church:"
+        android:text="News:"
         android:id="@+id/textView9"
         android:layout_below="@+id/button2"
         android:layout_alignStart="@+id/bioEditText"
@@ -127,7 +127,6 @@
         android:layout_below="@+id/button2"
         android:background="#ffffff"
         android:lines="3"
-        android:text="Bio"
         android:textSize="40px"
         android:minWidth="900px"
         android:layout_marginTop="30dp"
@@ -143,7 +142,6 @@
         android:id="@+id/scheduleEditText"
         android:background="#ffffff"
         android:lines="3"
-        android:text="Schedule"
         android:textSize="40px"
         android:minWidth="900px"
         android:paddingLeft="15px"
@@ -198,7 +196,8 @@
         android:layout_alignBottom="@+id/controlSpace"
         android:layout_alignStart="@+id/filterBroadcastEditText"
         android:minHeight="0dp"
-        android:minWidth="0dp" />
+        android:minWidth="0dp"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -209,7 +208,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button4" />
+        android:layout_toEndOf="@+id/button4"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -220,7 +220,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button5" />
+        android:layout_toEndOf="@+id/button5"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -231,7 +232,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button6" />
+        android:layout_toEndOf="@+id/button6"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -242,7 +244,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button7" />
+        android:layout_toEndOf="@+id/button7"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -253,7 +256,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button8" />
+        android:layout_toEndOf="@+id/button8"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -264,7 +268,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button9" />
+        android:layout_toEndOf="@+id/button9"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -275,7 +280,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button10" />
+        android:layout_toEndOf="@+id/button10"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -286,7 +292,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button11" />
+        android:layout_toEndOf="@+id/button11"
+        android:onClick="onPTZClick" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -297,7 +304,8 @@
         android:minHeight="0dp"
         android:minWidth="0dp"
         android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button12" />
+        android:layout_toEndOf="@+id/button12"
+        android:onClick="onPTZClick" />
 
     <TextView
         android:layout_width="wrap_content"
