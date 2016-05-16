@@ -13,6 +13,12 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_details);
     }
 
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
+
     public void onSave(final View view) {
         Toast.makeText(this, "Data saved!", Toast.LENGTH_LONG).show();
     }

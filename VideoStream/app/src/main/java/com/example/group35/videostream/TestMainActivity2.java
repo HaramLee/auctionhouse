@@ -51,7 +51,8 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
         Spinner sItems = (Spinner) findViewById(R.id.spinner);
         sItems.setAdapter(adapter);
 
-
+        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
         payment_button = (Button) findViewById(R.id.button_payment);
         payment_button.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +88,7 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
     public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
 
         this.player = player;
-        String mVideoId = "r_KlltnQJbQ";
+        String mVideoId = "tutasHOm_Y8";
 
         if (mVideoId != null) {
             if (wasRestored) {
