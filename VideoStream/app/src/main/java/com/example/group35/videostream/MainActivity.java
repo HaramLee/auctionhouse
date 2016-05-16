@@ -126,7 +126,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                                 // onLoginFailed();
                                                 progressDialog.dismiss();
                                             }
-                                        }, 5000);
+                                        }, 1000);
 
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
