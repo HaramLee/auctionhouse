@@ -1,4 +1,4 @@
-package com.example.group35.videostream;
+package com.example.group35.elivelink;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,13 +15,15 @@ import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+/**
+ * Created by Haram on 5/17/2016.
+ */
+public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
 
     private TextView balanceText;
@@ -38,18 +39,7 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_main2);
-
-        List<String> spinnerArray =  new ArrayList<String>();
-        spinnerArray.add("First Baptist Church");
-        spinnerArray.add("item2");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, R.layout.spinner_item, spinnerArray);
-
-        adapter.setDropDownViewResource(R.layout.spinner_item);
-        Spinner sItems = (Spinner) findViewById(R.id.spinner);
-        sItems.setAdapter(adapter);
+        setContentView(R.layout.broadcaster_activity);
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
@@ -85,7 +75,7 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
     }
 
     @Override
-    public void onInitializationSuccess(Provider provider, final YouTubePlayer player, boolean wasRestored) {
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, final YouTubePlayer player, boolean wasRestored) {
 
         this.player = player;
         String mVideoId = "r_KlltnQJbQ";
@@ -101,7 +91,7 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
     }
 
     @Override
-    public void onInitializationFailure(Provider provider, YouTubeInitializationResult errorReason) {
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
         if (errorReason.isUserRecoverableError()) {
             errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
         } else {
@@ -118,7 +108,7 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
         }
     }
 
-    protected Provider getYouTubePlayerProvider() {
+    protected YouTubePlayer.Provider getYouTubePlayerProvider() {
         return youTubeView;
     }
 
@@ -145,4 +135,3 @@ public class TestMainActivity2 extends YouTubeBaseActivity implements YouTubePla
     }
 
 }
-
