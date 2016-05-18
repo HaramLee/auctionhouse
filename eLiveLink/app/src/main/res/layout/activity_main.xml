@@ -91,14 +91,9 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign In"
+                android:text="Sign In &amp; Register"
                 android:id="@+id/sign_in" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:id="@+id/sign_up" />
         </TableRow>
     </TableLayout>
 </RelativeLayout>
