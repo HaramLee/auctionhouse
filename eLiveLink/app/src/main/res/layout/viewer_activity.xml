@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.group35.elivelink.MainActivity">
 
-</LinearLayout>
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/youtube_view"
+        android:minHeight="120px"
+        android:background="#86d8f8"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+    </com.google.android.youtube.player.YouTubePlayerView>
+
+    <TableLayout
+        android:layout_below="@+id/youtube_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1"
+        android:id="@+id/table1">
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Title"
+                android:id="@+id/broadcastNameView"
+                android:layout_below="@+id/button2"
+                android:layout_alignStart="@+id/bioEditText"
+                android:textSize="40px" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/scheduleEditText"
+        android:background="#ffffff"
+        android:lines="3"
+        android:textSize="40px"
+        android:editable="false"
+        android:layout_below="@+id/table1"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/bioEditText"
+        android:background="#ffffff"
+        android:lines="3"
+        android:textSize="40px"
+        android:editable="false"
+        android:layout_below="@+id/scheduleEditText"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

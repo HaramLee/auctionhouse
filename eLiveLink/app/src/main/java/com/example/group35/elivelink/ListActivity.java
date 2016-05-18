@@ -154,49 +154,27 @@ public class ListActivity extends AppCompatActivity {
         list=(ListView)findViewById(R.id.broadcastListView);
         list.setAdapter(adapter);
 
+        final Intent to_viewer = new Intent(this, ViewerActivity.class);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(BroadcastListingActivity.this, broadcasts.get(position).toString() + " selected.",
-//                               Toast.LENGTH_LONG).show();
 
+                for (Broadcast a : broadcasts) {
+                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
+                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
+                        to_viewer.putExtra("broadcaster_bio", a.getBio());
+                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
+                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
+                        break;
+                    }
+                }
 
-                startActivity(new Intent(ListActivity.this, ViewerActivity.class));
+                startActivity(to_viewer);
+
 
             }
         });
-
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-//                this, R.layout.spinner_item, spinnerArray);
-//
-//        adapter.setDropDownViewResource(R.layout.spinner_item);
-//        Spinner sItems = (Spinner) findViewById(R.id.spinner);
-
-//        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-//                //Toast.makeText(TestMainActivity.this, spinnerArray.get(position).toString(), Toast.LENGTH_LONG).show();
-//
-//                for (Broadcast a : broadcasts) {
-//                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
-//                        broadcastNameTextView.setText(a.getBroadcastName());
-//                        bioEditText.setText(a.getBio());
-//                        scheduleEditText.setText(a.getSchedule());
-//                        currentYoutubeID = a.getYoutubeVidID();
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//                // your code here
-//            }
-//
-//        });
-//
-//        sItems.setAdapter(adapter);
     }
 
     public void onFilter(final View view) {
