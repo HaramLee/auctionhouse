@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -32,41 +33,28 @@ import java.util.Map;
  */
 public class ListActivity extends AppCompatActivity {
 
-    private List<String> spinnerArray;
     private List<Broadcast> broadcasts;
+    private List<String> spinnerArray;
+    private List<String> scheduleArray;
 
     private RequestQueue requestQueue;
     private StringRequest request;
+
+    private EditText filterEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.broadcast_list);
 
+        filterEditText = (EditText) findViewById(R.id.filterBroadcastEditText);
+
         broadcasts = new ArrayList<Broadcast>();
         spinnerArray =  new ArrayList<String>();
+        scheduleArray =  new ArrayList<String>();
 
         getAvailableBroadcasts();
 
-
-        String[] itemname ={
-                "Broadcast 1",
-                "Broadcast 2",
-                "Broadcast 3",
-                "Broadcast 4",
-                "Broadcast 5",
-                "Broadcast 6",
-                "Broadcast 7",
-                "Broadcast 8 "
-        };
-
-        //images = new ArrayList<Integer>();
-        //images.add(R.drawable.ic_launcher);
-
-        Integer[] imgid={
-                R.drawable.ic_launcher,
-
-        };
     }
 
     public void onPaymentDetails(final View view) {
@@ -145,6 +133,7 @@ public class ListActivity extends AppCompatActivity {
 
         for(Broadcast a: broadcasts) {
             spinnerArray.add(a.getBroadcastName());
+            scheduleArray.add(a.getSchedule());
         }
 
         initializeSpinner();
@@ -155,22 +144,28 @@ public class ListActivity extends AppCompatActivity {
      */
     protected void initializeSpinner(){
 
-        ArrayAdapter<String> itemsAdapter =
-        new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, spinnerArray);
-        ListView listView = (ListView) findViewById(R.id.broadcastListView);
-        listView.setAdapter(itemsAdapter);
+        Integer[] imgid={
+                R.drawable.ic_launcher,
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        };
+
+        ListView list;
+        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
+        list=(ListView)findViewById(R.id.broadcastListView);
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ListActivity.this, broadcasts.get(position).toString() + " selected.",
-                               Toast.LENGTH_LONG).show();
+//                Toast.makeText(BroadcastListingActivity.this, broadcasts.get(position).toString() + " selected.",
+//                               Toast.LENGTH_LONG).show();
 
 
-                //startActivity(new Intent(ListActivity.this, ViewerActivity.class));
+                startActivity(new Intent(ListActivity.this, ViewerActivity.class));
 
             }
         });
+
 
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 //                this, R.layout.spinner_item, spinnerArray);
@@ -202,6 +197,26 @@ public class ListActivity extends AppCompatActivity {
 //        });
 //
 //        sItems.setAdapter(adapter);
+    }
+
+    public void onFilter(final View view) {
+
+        spinnerArray.clear();
+        scheduleArray.clear();
+
+        for(Broadcast a: broadcasts) {
+            if(a.getBroadcastName().toLowerCase().contains(filterEditText.getText().toString().toLowerCase())) {
+                spinnerArray.add(a.getBroadcastName());
+                scheduleArray.add(a.getSchedule());
+            }
+        }
+
+        if(spinnerArray.size() == 0) {
+            refreshSpinner();
+            Toast.makeText(ListActivity.this, "Broadcast name not found.", Toast.LENGTH_SHORT).show();
+        }
+
+        initializeSpinner();
     }
 
 }
