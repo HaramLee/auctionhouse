@@ -1,8 +1,12 @@
 package com.example.group35.elivelink;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -46,6 +50,9 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.broadcast_list);
+
+
+        getSupportActionBar().setTitle("Balance: $" + MainActivity.balance);
 
         filterEditText = (EditText) findViewById(R.id.filterBroadcastEditText);
 
@@ -195,6 +202,42 @@ public class ListActivity extends AppCompatActivity {
         }
 
         initializeSpinner();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_logout, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                Intent payment_activity = new Intent(ListActivity.this, PaymentDetailsActivity.class);
+                startActivity(payment_activity);
+                break;
+            case R.id.logout_settings:
+                SharedPreferences.Editor editor = MainActivity.mPreferences.edit();
+                editor.clear();   // This will delete all your preferences, check how to delete just one
+                editor.commit();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 }

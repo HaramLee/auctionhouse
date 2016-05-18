@@ -14,7 +14,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/filterBroadcastEditText"
         android:hint = "Search in broadcasters"
-        android:textSize="40px"
         android:background="#ffffff"
         android:layout_above="@+id/broadcastListView"
         android:layout_alignTop="@+id/button2" />

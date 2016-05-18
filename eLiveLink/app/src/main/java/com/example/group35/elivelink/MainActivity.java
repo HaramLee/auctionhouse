@@ -89,7 +89,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                                 editor.putString("username", "key");
 
-
                                 name = jsonObject.getString("username");
                                 isViewer = jsonObject.getString("isViewer");
                                 balance = jsonObject.getString("accountBalance");
@@ -117,7 +116,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                                 // onLoginFailed();
                                                 progressDialog.dismiss();
                                             }
-                                        }, 1000);
+                                        }, 3000);
 
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
@@ -200,7 +199,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                         // onLoginFailed();
                                         progressDialog.dismiss();
                                     }
-                                }, 1000);
+                                }, 3000);
 
                         if(jsonObject.getInt("isViewer")== 0){
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
@@ -278,25 +277,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         return youTubeView;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
