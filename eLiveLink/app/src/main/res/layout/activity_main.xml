@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/youtube_view"
         android:background="#86d8f8"
-        android:minHeight="100px"
+        android:minHeight="110dp"
+        android:minWidth="200dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
