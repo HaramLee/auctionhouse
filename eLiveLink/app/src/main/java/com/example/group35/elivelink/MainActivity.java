@@ -89,8 +89,10 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                                 editor.putString("username", "key");
 
-                                isViewer = jsonObject.getString("isViewer");
-                                balance = jsonObject.getString("accountBalance");
+                                if(jsonObject.has("isViewer")){
+                                    isViewer = jsonObject.getString("isViewer");
+                                    balance = jsonObject.getString("accountBalance");
+                                }
 
                                 final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
                                         R.style.AppTheme_Dark_Dialog);
@@ -117,15 +119,18 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                             }
                                         }, 3000);
 
-                                if(jsonObject.getInt("isViewer")== 0){
+                                if((!(jsonObject.has("isViewer")) || jsonObject.getInt("isViewer") == 1)) {
+                                    Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                                    intent.putExtra("userID", jsonObject.getString("userID"));
+                                    startActivity(intent);
+
+                                } else if(jsonObject.getInt("isViewer") == 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     name = jsonObject.getString("username");
                                     Intent intent = new Intent(getApplicationContext(), BroadcasterListActivity.class);
                                     intent.putExtra("userID", jsonObject.getString("userID"));
                                     startActivity(intent);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(getApplicationContext(), ListActivity.class));
                                 }
 
                             } else {
@@ -183,8 +188,10 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("success")) {
 
-                        isViewer = jsonObject.getString("isViewer");
-                        balance = jsonObject.getString("accountBalance");
+                        if(jsonObject.has("isViewer")){
+                            isViewer = jsonObject.getString("isViewer");
+                            balance = jsonObject.getString("accountBalance");
+                        }
 
                         final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
                                 R.style.AppTheme_Dark_Dialog);
@@ -210,7 +217,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), ListActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                            intent.putExtra("userID", jsonObject.getString("userID"));
+                            startActivity(intent);
                         }
 
                     } else {

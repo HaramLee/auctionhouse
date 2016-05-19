@@ -51,11 +51,15 @@ public class ListActivity extends AppCompatActivity {
 
     private EditText filterEditText;
 
+    private int userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.broadcast_list);
 
+        Intent intent = getIntent();
+        userID = Integer.parseInt(intent.getExtras().getString("userID"));
 
         getSupportActionBar().setTitle("Balance: $" + MainActivity.balance);
 
@@ -215,6 +219,7 @@ public class ListActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_settings:
                 Intent payment_activity = new Intent(ListActivity.this, PaymentDetailsActivity.class);
+                payment_activity.putExtra("userID", userID);
                 startActivity(payment_activity);
                 break;
             case R.id.logout_settings:
