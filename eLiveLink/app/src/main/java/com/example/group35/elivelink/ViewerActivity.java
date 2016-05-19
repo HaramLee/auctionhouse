@@ -120,6 +120,7 @@ public class ViewerActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     @Override
     public void onBackPressed() {
+
         startActivity(new Intent(getApplicationContext(), ListActivity.class));
     }
 

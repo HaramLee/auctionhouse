@@ -41,9 +41,10 @@ public class BroadcasterListActivity extends AppCompatActivity {
     private List<Broadcast> broadcasts;
     private List<String> broadcastNames;
 
+    private Double jsonAccountBalance;
+
     private int userID;
     static final String KEY_USERID = "login_id";
-    static final String KEY_BALANCE ="login_balance";
 
     private List<String> scheduleArray;
     private List<Integer> isBroadcastingArray;
@@ -61,16 +62,61 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcastListView = (ListView) findViewById(R.id.broadcasterListView);
 
         String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
-        String current_balance = MainActivity.mPreferences.getString(KEY_BALANCE, "");
 
         userID = Integer.parseInt(string_userID);
 
-        getSupportActionBar().setTitle("Balance: $" + current_balance);
+        getUSerBalance();
 
-        //userID = 2;
         getUserBroadcasts();
 
     }
+
+    public void getUSerBalance(){
+        broadcasts.clear();
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        request = new StringRequest(Request.Method.POST, Config.DB_USER_CONTROL_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has("success")) {
+                        //Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                        jsonAccountBalance = jsonObject.getDouble("accountBalance");
+
+                    } else {
+                       //Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                getSupportActionBar().setTitle("Balance: $" + jsonAccountBalance);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_GET_USER_DETAILS);
+                hashMap.put("userID", "" + userID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
 
 
     /**
@@ -328,7 +374,6 @@ public class BroadcasterListActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_settings:
                 Intent payment_activity = new Intent(BroadcasterListActivity.this, PaymentDetailsActivity.class);
-                payment_activity.putExtra("userID", userID);
                 startActivity(payment_activity);
                 break;
             case R.id.logout_settings:

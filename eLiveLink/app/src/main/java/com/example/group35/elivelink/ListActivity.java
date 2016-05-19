@@ -44,7 +44,7 @@ public class ListActivity extends AppCompatActivity {
     private List<Integer> userID_list;
     private List<String> spinnerArray;
     private List<String> scheduleArray;
-    private List<Integer> imageArray;
+    private List<Double> streamPriceArray;
 
     private RequestQueue requestQueue;
     private StringRequest request;
@@ -53,7 +53,8 @@ public class ListActivity extends AppCompatActivity {
 
     private int userID;
     static final String KEY_USERID = "login_id";
-    static final String KEY_BALANCE ="login_balance";
+
+    private Double jsonAccountBalance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +62,8 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.broadcast_list);
 
         String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
-        String current_balance = MainActivity.mPreferences.getString(KEY_BALANCE, "");
-
         userID = Integer.parseInt(string_userID);
 
-        getSupportActionBar().setTitle("Balance: $" + current_balance);
 
         filterEditText = (EditText) findViewById(R.id.filterBroadcastEditText);
 
@@ -75,15 +73,58 @@ public class ListActivity extends AppCompatActivity {
         userID_list = new ArrayList<Integer>();
         broadcasters_list = new ArrayList<String>();
         userID_list = new ArrayList<Integer>();
+        streamPriceArray = new ArrayList<>();
 
         getAvailableBroadcasts();
 
     }
 
-    public void onPaymentDetails(final View view) {
-        Intent intent = new Intent(this, PaymentDetailsActivity.class);
-        startActivity(intent);
+    public void getUSerBalance(){
+        broadcasts.clear();
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        request = new StringRequest(Request.Method.POST, Config.DB_USER_CONTROL_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has("success")) {
+                        //Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                        jsonAccountBalance = jsonObject.getDouble("accountBalance");
+
+                    } else {
+                        //Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                getSupportActionBar().setTitle("Balance: $" + jsonAccountBalance);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_GET_USER_DETAILS);
+                hashMap.put("userID", "" + userID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
     }
+
 
     public void getAvailableBroadcasts(){
 
@@ -114,6 +155,7 @@ public class ListActivity extends AppCompatActivity {
                                 tempBroadcast.setYoutubeVidID(((JSONObject) jsonBroadcasts.get(key)).getString("youtubeVidID"));
                                 tempBroadcast.setUserID(((JSONObject) jsonBroadcasts.get(key)).getInt("userID"));
                                 tempBroadcast.setUserName(((JSONObject) jsonBroadcasts.get(key)).getString("userName"));
+                                tempBroadcast.setSubscribeCost(((JSONObject) jsonBroadcasts.get(key)).getDouble("subscribeCost"));
 
                                 broadcasts.add(tempBroadcast);
                             }
@@ -225,7 +267,6 @@ public class ListActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_settings:
                 Intent payment_activity = new Intent(ListActivity.this, PaymentDetailsActivity.class);
-                payment_activity.putExtra("userID", userID);
                 startActivity(payment_activity);
                 break;
             case R.id.logout_settings:
@@ -249,21 +290,20 @@ public class ListActivity extends AppCompatActivity {
     {
 
         Integer[] imgid={
-                R.drawable.ic_launcher,
-
         };
 
         spinnerArray.clear();
         scheduleArray.clear();
+        streamPriceArray.clear();
 
         for(Broadcast a: broadcasts) {
             if (a.getUserID() == userID_list.get(pos)) {
                 spinnerArray.add(a.getBroadcastName());
                 scheduleArray.add(a.getSchedule());
+                streamPriceArray.add(a.getSubscribeCost());
             }
         }
 
-        //final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View convertView = (View) inflater.inflate(R.layout.pop_up_list_activity, null);
@@ -271,7 +311,7 @@ public class ListActivity extends AppCompatActivity {
         alertDialog.setTitle("Available Stream");
 
         ListView list = (ListView) convertView.findViewById(R.id.popup_listView);
-        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
+        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray,streamPriceArray ,imgid );
         list.setAdapter(adapter);
         alertDialog.show();
 
