@@ -46,7 +46,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
     static final String KEY_BALANCE ="login_balance";
 
     private List<String> scheduleArray;
-    private List<Integer> imageArray;
+    private List<Integer> isBroadcastingArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcasts = new ArrayList<>();
         broadcastNames = new ArrayList<>();
         scheduleArray = new ArrayList<>();
+        isBroadcastingArray = new ArrayList<>();
         broadcastListView = (ListView) findViewById(R.id.broadcasterListView);
 
         String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
@@ -242,6 +243,8 @@ public class BroadcasterListActivity extends AppCompatActivity {
     protected void initializeListView() {
 
         broadcastNames.clear();
+        scheduleArray.clear();
+        isBroadcastingArray.clear();
 
         Integer[] imgid={
                 R.drawable.x_mark,
@@ -251,10 +254,12 @@ public class BroadcasterListActivity extends AppCompatActivity {
         for(Broadcast a: broadcasts) {
             broadcastNames.add(a.getBroadcastName());
             scheduleArray.add(a.getSchedule());
+            isBroadcastingArray.add(a.getIsBroadcasting());
         }
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(BroadcasterListActivity.this, android.R.layout.simple_list_item_1, broadcastNames);
-        Broadcaster_CustomListAdapter adapter_broadcast=new Broadcaster_CustomListAdapter(this, broadcastNames, scheduleArray ,imgid );
+        Broadcaster_CustomListAdapter adapter_broadcast=new Broadcaster_CustomListAdapter
+                (this, broadcastNames, scheduleArray , isBroadcastingArray ,imgid );
         broadcastListView.setAdapter(adapter_broadcast);
         broadcastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

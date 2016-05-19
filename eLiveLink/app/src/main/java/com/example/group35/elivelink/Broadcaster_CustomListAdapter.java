@@ -18,15 +18,18 @@ public class Broadcaster_CustomListAdapter extends ArrayAdapter<String> {
     private final Activity context;
     private List<String> broadcastNames;
     private List<String> scheduleArray;
+    private List<Integer> isBroadcastingArray;
     private final Integer[] imgid;
 
-    public Broadcaster_CustomListAdapter(Activity context,List<String> broadcastNames, List<String> scheduleArray, Integer[] imgid) {
+    public Broadcaster_CustomListAdapter(Activity context,List<String> broadcastNames,
+                                        List<String> scheduleArray, List<Integer> isBroadcastingArray, Integer[] imgid) {
         super(context, R.layout.broadcaster_custom_list, broadcastNames);
         // TODO Auto-generated constructor stub
 
         this.context=context;
         this.broadcastNames=broadcastNames;
         this.scheduleArray=scheduleArray;
+        this.isBroadcastingArray = isBroadcastingArray;
         this.imgid=imgid;
     }
 
@@ -39,7 +42,8 @@ public class Broadcaster_CustomListAdapter extends ArrayAdapter<String> {
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
-        imageView.setImageResource(imgid[0]);
+
+        imageView.setImageResource(imgid[isBroadcastingArray.get(position)]);
         txtTitle.setText(broadcastNames.get(position));
         extratxt.setText(scheduleArray.get(position));
         return rowView;
