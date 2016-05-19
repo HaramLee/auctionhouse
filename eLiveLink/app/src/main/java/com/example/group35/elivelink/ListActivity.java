@@ -174,16 +174,11 @@ public class ListActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,broadcasters_list);
         testlist=(ListView)findViewById(R.id.broadcastListView);
         testlist.setAdapter(adapter);
-        testlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        testlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                //Toast.makeText(TestMainActivity.this, spinnerArray.get(position).toString(), Toast.LENGTH_LONG).show();
-                popup(view);
-            }
+            public void onItemClick(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                popup(null);
             }
 
         });
