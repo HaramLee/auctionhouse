@@ -50,6 +50,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     private Button sign_in_register;
 
     public static SharedPreferences mPreferences;
+    public static String name;
     public static String isViewer;
     public static String balance;
 
@@ -118,6 +119,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                                    name = jsonObject.getString("username");
                                     startActivity(new Intent(getApplicationContext(), BroadcastActivity.class));
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
@@ -200,6 +202,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                         if(jsonObject.getInt("isViewer")== 0){
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                            name = jsonObject.getString("username");
                             startActivity(new Intent(getApplicationContext(), BroadcastActivity.class));
                         } else {
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
