@@ -30,8 +30,8 @@ public class Broadcast {
     public String getUserName(){ return userName; }
 
     public void setUserName(String userName){
-        if(userName == null) {
-            this.userName = " ";
+        if(userName.equals("null")) {
+            this.userName = "";
         }else{
             this.userName = userName;
         }
