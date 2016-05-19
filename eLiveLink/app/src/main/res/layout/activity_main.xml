@@ -29,6 +29,41 @@
                 android:layout_weight="1"/>
 
         </TableRow>
+
+        <TableRow
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="NEWS"
+                android:id="@+id/promoTextView"
+                android:textSize="20dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            >
+            <EditText
+                android:paddingLeft="16px"
+                android:paddingRight="16px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/newsEditText"
+                android:background="#ffffff"
+                android:lines="7"
+                android:editable="false"
+                android:layout_alignParentStart="true"
+                android:textSize="16dp"
+                android:layout_span="2" />
+
+        </TableRow>
+
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
