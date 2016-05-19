@@ -213,6 +213,10 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         requestQueue.add(request);
     }
 
+    /**
+     * Toggles if the video is broadcasting or not
+     * @param isBroadcasting
+     */
     public void toggleBroadcast(final int isBroadcasting){
 
         requestQueue = Volley.newRequestQueue(this);
@@ -256,6 +260,10 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         requestQueue.add(request);
     }
 
+    /**
+     * Save Button
+     * @param view
+     */
     public void onSaveButton(final View view) {
 
         updateCurrentBroadcastWithTextFields();
@@ -273,11 +281,19 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
 
     }
 
+    /**
+     * Start Button
+     * @param view
+     */
     public void onStartButton(final View view) {
 
         toggleBroadcast(1);
     }
 
+    /**
+     * Stop Button
+     * @param view
+     */
     public void onStopButton(final View view) {
 
         toggleBroadcast(0);
