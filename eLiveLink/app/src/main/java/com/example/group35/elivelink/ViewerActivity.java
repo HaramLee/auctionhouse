@@ -41,7 +41,6 @@ public class ViewerActivity extends YouTubeBaseActivity implements YouTubePlayer
         setContentView(R.layout.viewer_activity);
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
         Intent intent = getIntent();
         current_vid = intent.getExtras().getString("broadcaster_youtube");
@@ -57,7 +56,7 @@ public class ViewerActivity extends YouTubeBaseActivity implements YouTubePlayer
         bioEditText.setText(broad_bio);
         scheduleEditText.setText(broad_schedule);
 
-        if((!current_vid.isEmpty()) || current_vid != null) {
+        if((!current_vid.isEmpty()) && current_vid != null) {
             youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
         }
     }
