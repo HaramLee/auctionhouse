@@ -40,7 +40,6 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         TextView extratxt = (TextView) rowView.findViewById(R.id.textView1);
 
         txtTitle.setText(spinnerArray.get(position));
-        imageView.setImageResource(imgid[0]);
         extratxt.setText(scheduleArray.get(position));
         return rowView;
 

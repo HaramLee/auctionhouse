@@ -1,9 +1,11 @@
 package com.example.group35.elivelink;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -38,8 +40,11 @@ import java.util.Map;
 public class ListActivity extends AppCompatActivity {
 
     private List<Broadcast> broadcasts;
+    private List<String> broadcasters_list;
+    private List<Integer> userID_list;
     private List<String> spinnerArray;
     private List<String> scheduleArray;
+    private List<Integer> imageArray;
 
     private RequestQueue requestQueue;
     private StringRequest request;
@@ -59,6 +64,7 @@ public class ListActivity extends AppCompatActivity {
         broadcasts = new ArrayList<Broadcast>();
         spinnerArray =  new ArrayList<String>();
         scheduleArray =  new ArrayList<String>();
+
 
         getAvailableBroadcasts();
 
@@ -96,6 +102,8 @@ public class ListActivity extends AppCompatActivity {
                                 tempBroadcast.setBroadcastName(((JSONObject) jsonBroadcasts.get(key)).getString("broadcastName"));
                                 tempBroadcast.setSchedule(((JSONObject) jsonBroadcasts.get(key)).getString("schedule"));
                                 tempBroadcast.setYoutubeVidID(((JSONObject) jsonBroadcasts.get(key)).getString("youtubeVidID"));
+                                tempBroadcast.setUserID(((JSONObject) jsonBroadcasts.get(key)).getInt("userID"));
+                                tempBroadcast.setUserName(((JSONObject) jsonBroadcasts.get(key)).getString("userName"));
 
                                 broadcasts.add(tempBroadcast);
                             }
@@ -139,8 +147,13 @@ public class ListActivity extends AppCompatActivity {
         spinnerArray.clear();
 
         for(Broadcast a: broadcasts) {
-            spinnerArray.add(a.getBroadcastName());
-            scheduleArray.add(a.getSchedule());
+            broadcasters_list.add(a.getUserName());
+            userID_list.add(a.getUserID());
+        }
+
+        for(Broadcast b: broadcasts) {
+            spinnerArray.add(b.getBroadcastName());
+            scheduleArray.add(b.getSchedule());
         }
 
         initializeSpinner();
@@ -155,33 +168,50 @@ public class ListActivity extends AppCompatActivity {
                 R.drawable.ic_launcher,
 
         };
-
-        ListView list;
-        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
-        list=(ListView)findViewById(R.id.broadcastListView);
-        list.setAdapter(adapter);
-
-        final Intent to_viewer = new Intent(this, ViewerActivity.class);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView testlist;
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,broadcasters_list);
+        testlist=(ListView)findViewById(R.id.broadcastListView);
+        testlist.setAdapter(adapter);
+        testlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                for (Broadcast a : broadcasts) {
-                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
-                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
-                        to_viewer.putExtra("broadcaster_bio", a.getBio());
-                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
-                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
-                        break;
-                    }
-                }
-
-                startActivity(to_viewer);
-
-
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                //Toast.makeText(TestMainActivity.this, spinnerArray.get(position).toString(), Toast.LENGTH_LONG).show();
+                popup();
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
+
+//        ListView list;
+//        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
+//        list=(ListView)findViewById(R.id.broadcastListView);
+//        list.setAdapter(adapter);
+
+//        final Intent to_viewer = new Intent(this, ViewerActivity.class);
+//
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                for (Broadcast a : broadcasts) {
+//                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
+//                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
+//                        to_viewer.putExtra("broadcaster_bio", a.getBio());
+//                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
+//                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
+//                        break;
+//                    }
+//                }
+//
+//                startActivity(to_viewer);
+//
+//
+//            }
+//        });
     }
 
     public void onFilter(final View view) {
@@ -239,4 +269,30 @@ public class ListActivity extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
+
+    public void popup()
+    {
+        final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+        View convertView = (View) inflater.inflate(R.layout.pop_up_list_activity, null);
+        alertDialog.setView(convertView);
+        alertDialog.setTitle("Phone Options");
+        ListView lv = (ListView) convertView.findViewById(R.id.popup_listView);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options);
+        lv.setAdapter(adapter);
+        alertDialog.show();
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(ListActivity.this, options[position],
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+
+
 }

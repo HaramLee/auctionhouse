@@ -13,6 +13,8 @@ public class Broadcast {
     private int isBroadcasting;
     private double subscribeCost;
 
+    private int userID;
+    private String userName;
 
     /**
      * Default
@@ -21,10 +23,24 @@ public class Broadcast {
 
     }
 
+    public void setUserID(int userID) { this.userID = userID; }
+
+    public int getUserID () {return userID;}
+
+    public String getUserName(){ return userName; }
+
+    public void setUserName(String userName){
+        if(userName == null) {
+            this.userName = " ";
+        }else{
+            this.userName = userName;
+        }
+    }
+
+
     public int getBcID() {
         return bcID;
     }
-
     public void setBcID(int bcID) {
         this.bcID = bcID;
     }
