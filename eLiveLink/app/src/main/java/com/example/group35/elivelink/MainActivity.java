@@ -89,7 +89,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                                 editor.putString("username", "key");
 
-                                name = jsonObject.getString("username");
                                 isViewer = jsonObject.getString("isViewer");
                                 balance = jsonObject.getString("accountBalance");
 
