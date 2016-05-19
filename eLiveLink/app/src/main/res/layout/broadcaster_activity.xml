@@ -223,6 +223,7 @@
                 android:id="@+id/broadcastEditText"
                 android:background="#ffffff"
                 android:lines="2"
+                android:maxLines="2"
                 android:layout_alignParentStart="true"
                 android:textSize="16dp"
                 android:layout_column="1" />
@@ -242,6 +243,7 @@
                 android:id="@+id/youtubeEditText"
                 android:background="#ffffff"
                 android:lines="2"
+                android:maxLines="2"
                 android:layout_alignParentStart="true"
                 android:textSize="16dp"
                 android:layout_column="1" />
@@ -259,7 +261,6 @@
                 android:ems="10"
                 android:id="@+id/priceEditText"
                 android:background="#ffffff"
-                android:lines="2"
                 android:layout_alignParentStart="true"
                 android:textSize="16dp"
                 android:layout_column="1" />
@@ -279,6 +280,7 @@
                 android:id="@+id/bioEditText"
                 android:background="#ffffff"
                 android:lines="3"
+                android:maxLines="3"
                 android:layout_alignParentStart="true"
                 android:textSize="16dp"
                 android:layout_column="1" />
@@ -297,6 +299,7 @@
                 android:id="@+id/scheduleEditText"
                 android:background="#ffffff"
                 android:lines="3"
+                android:maxLines="3"
                 android:layout_alignParentStart="true"
                 android:textSize="16dp"
                 android:layout_column="1" />
