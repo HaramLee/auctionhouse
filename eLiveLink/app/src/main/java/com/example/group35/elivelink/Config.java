@@ -10,7 +10,7 @@ public final class Config {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyB426dqWxl3tYB7RfdUBtHF5JMNR2q-WSs";
 
-    public static final String DEFAULT_VIDEO = "6iJu_smJW-o";
+    public static final String DEFAULT_VIDEO = "WVP3fUzQHcg";
 
     //Database connection values
     public static final String DB_USER_CONTROL_URL = "http://mattu.5gbfree.com/user_control.php";

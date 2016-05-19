@@ -4,6 +4,5 @@
     tools:context=".MainActivity">
     <item android:id="@+id/logout_settings"
         android:title="Logout"
-        android:orderInCategory="100"
         app:showAsAction="never"/>
 </menu>
