@@ -50,7 +50,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     private Button sign_in_register;
 
     public static SharedPreferences mPreferences;
-    public static String name;
     public static String isViewer;
     public static String balance;
 
@@ -180,7 +179,6 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.names().get(0).equals("success")) {
 
-                        name = jsonObject.getString("username");
                         isViewer = jsonObject.getString("isViewer");
                         balance = jsonObject.getString("accountBalance");
 

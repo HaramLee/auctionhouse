@@ -70,7 +70,6 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         balanceText.setText(MainActivity.balance);
 
         nameText = (TextView) findViewById(R.id.textView);
-        nameText.setText(MainActivity.name);
 
     }
 
