@@ -44,20 +44,25 @@ public class BroadcasterListActivity extends AppCompatActivity {
     private List<String> broadcastNames;
 
     private int userID;
+    static final String KEY_USERID = "login_id";
+    static final String KEY_BALANCE ="login_balance";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_broadcaster_list);
 
-        getSupportActionBar().setTitle("Balance: $" + MainActivity.balance);
 
         broadcasts = new ArrayList<>();
         broadcastNames = new ArrayList<>();
         broadcastListView = (ListView) findViewById(R.id.broadcastListView);
 
-        Intent intent = getIntent();
-        userID = Integer.parseInt(intent.getExtras().getString("userID"));
+        String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
+        String current_balance = MainActivity.mPreferences.getString(KEY_BALANCE, "");
+
+        userID = Integer.parseInt(string_userID);
+
+        getSupportActionBar().setTitle("Balance: $" + current_balance);
 
         //userID = 2;
         getUserBroadcasts();

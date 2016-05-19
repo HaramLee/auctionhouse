@@ -52,16 +52,20 @@ public class ListActivity extends AppCompatActivity {
     private EditText filterEditText;
 
     private int userID;
+    static final String KEY_USERID = "login_id";
+    static final String KEY_BALANCE ="login_balance";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.broadcast_list);
 
-        Intent intent = getIntent();
-        userID = Integer.parseInt(intent.getExtras().getString("userID"));
+        String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
+        String current_balance = MainActivity.mPreferences.getString(KEY_BALANCE, "");
 
-        getSupportActionBar().setTitle("Balance: $" + MainActivity.balance);
+        userID = Integer.parseInt(string_userID);
+
+        getSupportActionBar().setTitle("Balance: $" + current_balance);
 
         filterEditText = (EditText) findViewById(R.id.filterBroadcastEditText);
 

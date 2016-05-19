@@ -139,7 +139,9 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
 
     @Override
     public void onBackPressed() {
+        finish();
         startActivity(new Intent(getApplicationContext(), BroadcasterListActivity.class));
+
     }
 
     /**

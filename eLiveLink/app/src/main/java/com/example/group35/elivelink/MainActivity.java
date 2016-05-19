@@ -53,9 +53,12 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public static String name;
     public static String isViewer;
     public static String balance;
+    String balanceSave = "0";
 
     static final String KEY_USERNAME = "login_name";
     static final String KEY_PASSWORD = "login_password";
+    static final String KEY_USERID = "login_id";
+    static final String KEY_BALANCE ="login_balance";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                 if(jsonObject.has("isViewer")){
                                     isViewer = jsonObject.getString("isViewer");
                                     balance = jsonObject.getString("accountBalance");
+                                    balanceSave = jsonObject.getString("accountBalance");
                                 }
 
                                 final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this,
@@ -103,9 +107,12 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                                 String emailSave = email_text.getText().toString();
                                 String passwordSave = password_text.getText().toString();
+                                String userIDSave = jsonObject.getString("userID");
 
                                 editor.putString(KEY_USERNAME, emailSave);
                                 editor.putString(KEY_PASSWORD, passwordSave);
+                                editor.putString(KEY_USERID, userIDSave);
+                                editor.putString(KEY_BALANCE, balanceSave);
                                 editor.commit();
 
                                 // TODO: Implement your own authentication logic here.
@@ -122,14 +129,14 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                 if((!(jsonObject.has("isViewer")) || jsonObject.getInt("isViewer") == 1)) {
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                                    intent.putExtra("userID", jsonObject.getString("userID"));
+                                    //intent.putExtra("userID",userIDSave );
                                     startActivity(intent);
 
                                 } else if(jsonObject.getInt("isViewer") == 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     name = jsonObject.getString("username");
                                     Intent intent = new Intent(getApplicationContext(), BroadcasterListActivity.class);
-                                    intent.putExtra("userID", jsonObject.getString("userID"));
+                                    //intent.putExtra("userID", jsonObject.getString("userID"));
                                     startActivity(intent);
                                 }
 
@@ -213,12 +220,12 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                             name = jsonObject.getString("username");
                             Intent intent = new Intent(getApplicationContext(), BroadcasterListActivity.class);
-                            intent.putExtra("userID", jsonObject.getString("userID"));
+                            //intent.putExtra("userID", jsonObject.getString("userID"));
                             startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                            intent.putExtra("userID", jsonObject.getString("userID"));
+                            //intent.putExtra("userID", jsonObject.getString("userID"));
                             startActivity(intent);
                         }
 
