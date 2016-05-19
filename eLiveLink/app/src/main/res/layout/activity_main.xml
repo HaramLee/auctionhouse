@@ -79,12 +79,13 @@
                 android:gravity="end"
                 android:padding="8dp"
                 android:text="Email: "
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="Enter ID"
+                android:inputType="text"
                 android:maxLines="1"
                 android:textSize="18sp"
                 android:id="@+id/email"/>
@@ -97,7 +98,7 @@
                 android:gravity="end"
                 android:padding="8dp"
                 android:text="Password: "
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
             <EditText
                 android:layout_width="wrap_content"
