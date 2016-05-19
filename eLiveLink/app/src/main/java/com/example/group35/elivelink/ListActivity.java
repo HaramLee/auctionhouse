@@ -237,8 +237,10 @@ public class ListActivity extends AppCompatActivity {
 
         for(Broadcast a: broadcasts) {
             if(a.getUserName().toLowerCase().contains(filterEditText.getText().toString().toLowerCase())) {
-                broadcasters_list.add(a.getUserName());
-                userID_list.add(a.getUserID());
+                if(!userID_list.contains(a.getUserID())) {
+                    broadcasters_list.add(a.getUserName());
+                    userID_list.add(a.getUserID());
+                }
             }
         }
 
