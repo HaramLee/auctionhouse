@@ -148,10 +148,7 @@ public class ListActivity extends AppCompatActivity {
         spinnerArray.clear();
 
         for(Broadcast a: broadcasts) {
-<<<<<<< HEAD
-            
-=======
->>>>>>> 4ab90b8136f04eda1dcc958f03a24373a03071b6
+            broadcasters_list.add(a.getUserName());
             userID_list.add(a.getUserID());
         }
 
