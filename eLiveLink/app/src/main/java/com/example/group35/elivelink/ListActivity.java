@@ -65,7 +65,8 @@ public class ListActivity extends AppCompatActivity {
         spinnerArray =  new ArrayList<String>();
         scheduleArray =  new ArrayList<String>();
         userID_list = new ArrayList<Integer>();
-
+        broadcasters_list = new ArrayList<String>();
+        userID_list = new ArrayList<Integer>();
 
         getAvailableBroadcasts();
 
@@ -177,7 +178,7 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 //Toast.makeText(TestMainActivity.this, spinnerArray.get(position).toString(), Toast.LENGTH_LONG).show();
-                popup();
+                popup(view);
             }
 
             @Override
@@ -271,7 +272,7 @@ public class ListActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void popup()
+    public void popup(final View view)
     {
         final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListActivity.this);
