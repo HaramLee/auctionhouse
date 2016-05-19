@@ -176,7 +176,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<String, String>();
                 hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
-                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_GET_BROADCAST_WITH_USERID);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_GET_BROADCASTS_WITH_USERID);
                 hashMap.put("userID", "" + userID);
 
                 return hashMap;

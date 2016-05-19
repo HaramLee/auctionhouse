@@ -20,6 +20,6 @@ public final class Config {
     public static final String DB_QUERY_TYPE_GET_BROADCASTS = "getBroadcasts";
     public static final String DB_QUERY_TYPE_UPDATE_BROADCAST = "updateBroadcast";
     public static final String DB_QUERY_TYPE_TOGGLE_BROADCAST = "toggleBroadcast";
-    public static final String DB_QUERY_TYPE_GET_BROADCAST_WITH_USERID = "getUserBroadcast";
+    public static final String DB_QUERY_TYPE_GET_BROADCASTS_WITH_USERID = "getUserBroadcasts";
 
 }
