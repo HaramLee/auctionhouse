@@ -74,7 +74,7 @@ public class ListActivity extends AppCompatActivity {
         broadcasters_list = new ArrayList<String>();
         userID_list = new ArrayList<Integer>();
         streamPriceArray = new ArrayList<>();
-
+        getUSerBalance();
         getAvailableBroadcasts();
 
     }
