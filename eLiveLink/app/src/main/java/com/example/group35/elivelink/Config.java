@@ -18,5 +18,8 @@ public final class Config {
     public static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     public static final String DB_QUERY_TYPE_USER_LOGIN = "login";
     public static final String DB_QUERY_TYPE_GET_BROADCASTS = "getBroadcasts";
+    public static final String DB_QUERY_TYPE_UPDATE_BROADCAST = "updateBroadcast";
+    public static final String DB_QUERY_TYPE_TOGGLE_BROADCAST = "toggleBroadcast";
+    public static final String DB_QUERY_TYPE_GET_BROADCAST_WITH_USERID = "getUserBroadcast";
 
 }

@@ -10,6 +10,9 @@ public class Broadcast {
     private String youtubeVidID;
     private String bio;
     private String schedule;
+    private int isBroadcasting;
+    private double subscribeCost;
+
 
     /**
      * Default
@@ -64,5 +67,21 @@ public class Broadcast {
         }else{
             this.schedule = schedule;
         }
+    }
+
+    public int getIsBroadcasting() {
+        return isBroadcasting;
+    }
+
+    public void setIsBroadcasting(int isBroadcasting) {
+        this.isBroadcasting = isBroadcasting;
+    }
+
+    public double getSubscribeCost() {
+        return subscribeCost;
+    }
+
+    public void setSubscribeCost(double subscribeCost) {
+        this.subscribeCost = subscribeCost;
     }
 }
