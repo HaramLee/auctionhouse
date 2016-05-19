@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -147,14 +148,14 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
                     if (jsonObject.names().get(0).equals("success")) {
                         Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
 
-                        currentBroadcast = new Broadcast();
-                        currentBroadcast.setBcID(jsonObject.getInt("bcID"));
-                        currentBroadcast.setBio(jsonObject.getString("bio"));
-                        currentBroadcast.setBroadcastName(jsonObject.getString("broadcastName"));
-                        currentBroadcast.setSchedule(jsonObject.getString("schedule"));
-                        currentBroadcast.setYoutubeVidID(jsonObject.getString("youtubeVidID"));
-                        currentBroadcast.setSubscribeCost(jsonObject.getDouble("subscribeCost"));
-                        currentBroadcast.setIsBroadcasting(jsonObject.getInt("isBroadcasting"));
+//                        currentBroadcast = new Broadcast();
+//                        currentBroadcast.setBcID(jsonObject.getInt("bcID"));
+//                        currentBroadcast.setBio(jsonObject.getString("bio"));
+//                        currentBroadcast.setBroadcastName(jsonObject.getString("broadcastName"));
+//                        currentBroadcast.setSchedule(jsonObject.getString("schedule"));
+//                        currentBroadcast.setYoutubeVidID(jsonObject.getString("youtubeVidID"));
+//                        currentBroadcast.setSubscribeCost(jsonObject.getDouble("subscribeCost"));
+//                        currentBroadcast.setIsBroadcasting(jsonObject.getInt("isBroadcasting"));
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Error " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
@@ -266,7 +267,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
                 HashMap<String, String> hashMap = new HashMap<String, String>();
                 hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
                 hashMap.put("db_query_type", Config.DB_QUERY_TYPE_TOGGLE_BROADCAST);
-                hashMap.put("userID", "" + userID);
+                hashMap.put("bcID", "" + 1);
                 hashMap.put("isBroadcasting", "" + 1);
 
                 return hashMap;
@@ -306,11 +307,97 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String, String> hashMap = new HashMap<String, String>();
+                HashMap<String, String>hashMap = new HashMap<String, String>();
                 hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
                 hashMap.put("db_query_type", Config.DB_QUERY_TYPE_TOGGLE_BROADCAST);
-                hashMap.put("userID", "" + userID);
+                hashMap.put("bcID", "" + 1);
                 hashMap.put("isBroadcasting", "" + 0);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    public void createBroadcast(final View view){
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        request = new StringRequest(Request.Method.POST, Config.DB_BROADCAST_CONTROL_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_CREATE_BROADCAST);
+                hashMap.put("userID", "" + userID);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
+    }
+
+    public void deleteBroadcast(final View view){
+
+        final EditText filter = (EditText) findViewById(R.id.filterBroadcastEditText);
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        request = new StringRequest(Request.Method.POST, Config.DB_BROADCAST_CONTROL_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.names().get(0).equals("success")) {
+                        Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_DELETE_BROADCAST);
+                hashMap.put("bcID", "" + filter.getText().toString());
 
                 return hashMap;
             }
