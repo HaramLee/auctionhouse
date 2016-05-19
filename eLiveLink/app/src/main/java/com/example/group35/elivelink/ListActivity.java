@@ -147,7 +147,7 @@ public class ListActivity extends AppCompatActivity {
         spinnerArray.clear();
 
         for(Broadcast a: broadcasts) {
-
+            
             userID_list.add(a.getUserID());
         }
 
