@@ -5,25 +5,33 @@
     android:layout_height="match_parent"
     tools:context="com.example.group35.elivelink.MainActivity">
 
-    <com.google.android.youtube.player.YouTubePlayerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/youtube_view"
-        android:background="#86d8f8"
-        android:minHeight="110dp"
-        android:minWidth="200dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-    </com.google.android.youtube.player.YouTubePlayerView>
 
     <TableLayout
-        android:layout_below="@+id/youtube_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="1"
         android:id="@+id/table1">
 
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/controlSpace"
+            android:minHeight="200px"
+            android:background="#86d8f8"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            >
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/youtube_view"
+                android:layout_span="2"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+            </com.google.android.youtube.player.YouTubePlayerView>
+
+        </TableRow>
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
