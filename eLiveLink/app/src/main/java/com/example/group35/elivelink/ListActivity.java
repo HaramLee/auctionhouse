@@ -64,6 +64,7 @@ public class ListActivity extends AppCompatActivity {
         broadcasts = new ArrayList<Broadcast>();
         spinnerArray =  new ArrayList<String>();
         scheduleArray =  new ArrayList<String>();
+        userID_list = new ArrayList<Integer>();
 
 
         getAvailableBroadcasts();
@@ -147,7 +148,10 @@ public class ListActivity extends AppCompatActivity {
         spinnerArray.clear();
 
         for(Broadcast a: broadcasts) {
+<<<<<<< HEAD
             
+=======
+>>>>>>> 4ab90b8136f04eda1dcc958f03a24373a03071b6
             userID_list.add(a.getUserID());
         }
 
