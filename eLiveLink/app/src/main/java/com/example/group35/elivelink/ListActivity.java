@@ -278,8 +278,6 @@ public class ListActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-//                Toast.makeText(ListActivity.this, spinnerArray.get(position),
-//                        Toast.LENGTH_SHORT).show();
 
                 for (Broadcast a : broadcasts) {
                     if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {

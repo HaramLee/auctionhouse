@@ -11,8 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -47,6 +45,9 @@ public class BroadcasterListActivity extends AppCompatActivity {
     static final String KEY_USERID = "login_id";
     static final String KEY_BALANCE ="login_balance";
 
+    private List<String> scheduleArray;
+    private List<Integer> imageArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,8 @@ public class BroadcasterListActivity extends AppCompatActivity {
 
         broadcasts = new ArrayList<>();
         broadcastNames = new ArrayList<>();
-        broadcastListView = (ListView) findViewById(R.id.broadcastListView);
+        scheduleArray = new ArrayList<>();
+        broadcastListView = (ListView) findViewById(R.id.broadcasterListView);
 
         String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
         String current_balance = MainActivity.mPreferences.getString(KEY_BALANCE, "");
@@ -241,12 +243,19 @@ public class BroadcasterListActivity extends AppCompatActivity {
 
         broadcastNames.clear();
 
+        Integer[] imgid={
+                R.drawable.x_mark,
+                R.drawable.check_mark
+        };
+
         for(Broadcast a: broadcasts) {
             broadcastNames.add(a.getBroadcastName());
+            scheduleArray.add(a.getSchedule());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(BroadcasterListActivity.this, android.R.layout.simple_list_item_1, broadcastNames);
-        broadcastListView.setAdapter(adapter);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(BroadcasterListActivity.this, android.R.layout.simple_list_item_1, broadcastNames);
+        Broadcaster_CustomListAdapter adapter_broadcast=new Broadcaster_CustomListAdapter(this, broadcastNames, scheduleArray ,imgid );
+        broadcastListView.setAdapter(adapter_broadcast);
         broadcastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> arg0, View arg1, final int pos, long arg3) {

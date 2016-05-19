@@ -22,7 +22,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/broadcastListView"
+        android:id="@+id/broadcasterListView"
         android:layout_below="@+id/newBroadcastButton"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

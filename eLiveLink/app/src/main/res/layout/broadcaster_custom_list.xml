@@ -5,6 +5,12 @@
     android:orientation="horizontal"
     android:weightSum="1">
 
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="5dp" />
+
     <RelativeLayout android:layout_width="match_parent"
         android:layout_height="57dp"
         android:orientation="vertical">
