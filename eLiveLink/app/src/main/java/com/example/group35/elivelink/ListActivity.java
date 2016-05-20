@@ -146,16 +146,12 @@ public class ListActivity extends AppCompatActivity {
      */
     public void refreshSpinner() {
 
-        spinnerArray.clear();
+        broadcasters_list.clear();
+        userID_list.clear();
 
         for(Broadcast a: broadcasts) {
             broadcasters_list.add(a.getUserName());
             userID_list.add(a.getUserID());
-        }
-
-        for(Broadcast b: broadcasts) {
-            spinnerArray.add(b.getBroadcastName());
-            scheduleArray.add(b.getSchedule());
         }
 
         initializeSpinner();
@@ -178,10 +174,12 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                popup(null);
+                popup(null, position);
+
             }
 
         });
+
 
 //        ListView list;
 //        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
@@ -267,26 +265,52 @@ public class ListActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void popup(final View view)
+    public void popup(final View view, int pos)
     {
-        final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
+        spinnerArray.clear();
+
+        for(Broadcast a: broadcasts) {
+            if (a.getUserID() == userID_list.get(pos)) {
+                spinnerArray.add(a.getBroadcastName());
+                scheduleArray.add(a.getSchedule());
+            }
+        }
+
+        //final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View convertView = (View) inflater.inflate(R.layout.pop_up_list_activity, null);
         alertDialog.setView(convertView);
-        alertDialog.setTitle("Phone Options");
+        alertDialog.setTitle("Available Stream");
         ListView lv = (ListView) convertView.findViewById(R.id.popup_listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,spinnerArray);
         lv.setAdapter(adapter);
         alertDialog.show();
+
+        final Intent to_viewer = new Intent(this, ViewerActivity.class);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(ListActivity.this, options[position],
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ListActivity.this, spinnerArray.get(position),
+//                        Toast.LENGTH_SHORT).show();
+
+                for (Broadcast a : broadcasts) {
+                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
+                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
+                        to_viewer.putExtra("broadcaster_bio", a.getBio());
+                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
+                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
+                        break;
+                    }
+                }
+
+                startActivity(to_viewer);
+
+
             }
         });
+
 
     }
 

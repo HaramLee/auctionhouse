@@ -118,5 +118,10 @@ public class ViewerActivity extends YouTubeBaseActivity implements YouTubePlayer
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ListActivity.class));
+    }
+
 }
 
