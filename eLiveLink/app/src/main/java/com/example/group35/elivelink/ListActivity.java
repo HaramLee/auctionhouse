@@ -65,7 +65,8 @@ public class ListActivity extends AppCompatActivity {
         spinnerArray =  new ArrayList<String>();
         scheduleArray =  new ArrayList<String>();
         userID_list = new ArrayList<Integer>();
-
+        broadcasters_list = new ArrayList<String>();
+        userID_list = new ArrayList<Integer>();
 
         getAvailableBroadcasts();
 
@@ -145,16 +146,12 @@ public class ListActivity extends AppCompatActivity {
      */
     public void refreshSpinner() {
 
-        spinnerArray.clear();
+        broadcasters_list.clear();
+        userID_list.clear();
 
         for(Broadcast a: broadcasts) {
             broadcasters_list.add(a.getUserName());
             userID_list.add(a.getUserID());
-        }
-
-        for(Broadcast b: broadcasts) {
-            spinnerArray.add(b.getBroadcastName());
-            scheduleArray.add(b.getSchedule());
         }
 
         initializeSpinner();
@@ -165,69 +162,35 @@ public class ListActivity extends AppCompatActivity {
      */
     protected void initializeSpinner(){
 
-        Integer[] imgid={
-                R.drawable.ic_launcher,
-
-        };
         ListView testlist;
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,broadcasters_list);
         testlist=(ListView)findViewById(R.id.broadcastListView);
         testlist.setAdapter(adapter);
-        testlist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        testlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                //Toast.makeText(TestMainActivity.this, spinnerArray.get(position).toString(), Toast.LENGTH_LONG).show();
-                popup();
-            }
+            public void onItemClick(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
+                popup(null, position);
+
             }
 
         });
 
-//        ListView list;
-//        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
-//        list=(ListView)findViewById(R.id.broadcastListView);
-//        list.setAdapter(adapter);
-
-//        final Intent to_viewer = new Intent(this, ViewerActivity.class);
-//
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                for (Broadcast a : broadcasts) {
-//                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
-//                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
-//                        to_viewer.putExtra("broadcaster_bio", a.getBio());
-//                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
-//                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
-//                        break;
-//                    }
-//                }
-//
-//                startActivity(to_viewer);
-//
-//
-//            }
-//        });
     }
 
     public void onFilter(final View view) {
 
-        spinnerArray.clear();
-        scheduleArray.clear();
+        broadcasters_list.clear();
+        userID_list.clear();
 
         for(Broadcast a: broadcasts) {
-            if(a.getBroadcastName().toLowerCase().contains(filterEditText.getText().toString().toLowerCase())) {
-                spinnerArray.add(a.getBroadcastName());
-                scheduleArray.add(a.getSchedule());
+            if(a.getUserName().toLowerCase().contains(filterEditText.getText().toString().toLowerCase())) {
+                broadcasters_list.add(a.getUserName());
+                userID_list.add(a.getUserID());
             }
         }
 
-        if(spinnerArray.size() == 0) {
+        if(broadcasters_list.size() == 0) {
             refreshSpinner();
             Toast.makeText(ListActivity.this, "Broadcast name not found.", Toast.LENGTH_SHORT).show();
         }
@@ -271,26 +234,60 @@ public class ListActivity extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    public void popup()
+    public void popup(final View view, int pos)
     {
-        final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
+
+        Integer[] imgid={
+                R.drawable.ic_launcher,
+
+        };
+
+        spinnerArray.clear();
+        scheduleArray.clear();
+
+        for(Broadcast a: broadcasts) {
+            if (a.getUserID() == userID_list.get(pos)) {
+                spinnerArray.add(a.getBroadcastName());
+                scheduleArray.add(a.getSchedule());
+            }
+        }
+
+        //final String options[] ={"Option 1","Option 2","Option 3","Option 4"};
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(ListActivity.this);
         LayoutInflater inflater = getLayoutInflater();
         View convertView = (View) inflater.inflate(R.layout.pop_up_list_activity, null);
         alertDialog.setView(convertView);
-        alertDialog.setTitle("Phone Options");
-        ListView lv = (ListView) convertView.findViewById(R.id.popup_listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,options);
-        lv.setAdapter(adapter);
+        alertDialog.setTitle("Available Stream");
+
+        ListView list = (ListView) convertView.findViewById(R.id.popup_listView);
+        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
+        list.setAdapter(adapter);
         alertDialog.show();
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final Intent to_viewer = new Intent(this, ViewerActivity.class);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Toast.makeText(ListActivity.this, options[position],
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ListActivity.this, spinnerArray.get(position),
+//                        Toast.LENGTH_SHORT).show();
+
+                for (Broadcast a : broadcasts) {
+                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
+                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
+                        to_viewer.putExtra("broadcaster_bio", a.getBio());
+                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
+                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
+                        break;
+                    }
+                }
+
+                startActivity(to_viewer);
+
+
             }
         });
+
 
     }
 
