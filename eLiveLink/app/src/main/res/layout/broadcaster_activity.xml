@@ -283,30 +283,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Stop"
-                android:id="@+id/stop_broadcast"
+                android:id="@+id/stopBroadcastButton"
                 android:layout_column="1"
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/start_broadcast"
-                />
+                android:layout_toEndOf="@+id/startBroadcastButton"
+                    android:onClick="onStopButton" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Save"
-                    android:id="@+id/save_setting"
-                    android:layout_toEndOf="@+id/stop_broadcast"
-                    android:layout_alignBottom="@+id/stop_broadcast"
-                    />
+                    android:id="@+id/saveSettingButton"
+                    android:layout_toEndOf="@+id/stopBroadcastButton"
+                    android:layout_alignBottom="@+id/stopBroadcastButton"
+                    android:onClick="onSaveButton" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Start"
-                    android:id="@+id/start_broadcast"
+                    android:id="@+id/startBroadcastButton"
                     android:layout_column="0"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    />
+                    android:onClick="onStartButton" />
 
             </RelativeLayout>
         </TableRow>

@@ -58,7 +58,11 @@ public class Broadcast {
     }
 
     public void setYoutubeVidID(String youtubeVidID) {
-        this.youtubeVidID = youtubeVidID;
+        if(youtubeVidID.equals("null")) {
+            this.youtubeVidID = "";
+        }else{
+            this.youtubeVidID = youtubeVidID;
+        }
     }
 
     public String getBio() {
