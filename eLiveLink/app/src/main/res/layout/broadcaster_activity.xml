@@ -28,19 +28,10 @@
         >
 
         <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
-
-        </TableRow>
-
-
-        <TableRow>
             <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:layout_column="1">
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -201,25 +192,55 @@
         <TableRow>
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                />
-
-        </TableRow>
-
-        <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Title"
+                android:text="Stream Setting"
                 android:id="@+id/broadcastNameView"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:layout_column="1" />
 
         </TableRow>
 
         <TableRow>
             <EditText
+                android:hint="Broadcast Title"
+                android:paddingLeft="16px"
+                android:paddingRight="16px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/broadcastEditText"
+                android:background="#ffffff"
+                android:lines="2"
+                android:layout_alignParentStart="true"
+                android:textSize="16dp"
+                android:layout_column="1" />
+
+        </TableRow>
+
+
+        <TableRow>
+            <EditText
+                android:hint="YouTube Link"
+                android:paddingLeft="16px"
+                android:paddingRight="16px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/youtubeEditText"
+                android:background="#ffffff"
+                android:lines="2"
+                android:layout_alignParentStart="true"
+                android:textSize="16dp"
+                android:layout_column="1" />
+
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:hint="Bio of the stream"
                 android:paddingLeft="16px"
                 android:paddingRight="16px"
                 android:layout_width="wrap_content"
@@ -229,14 +250,15 @@
                 android:id="@+id/bioEditText"
                 android:background="#ffffff"
                 android:lines="3"
-                android:editable="false"
                 android:layout_alignParentStart="true"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:layout_column="1" />
 
         </TableRow>
 
         <TableRow>
             <EditText
+                android:hint="Schedule of the stream"
                 android:paddingLeft="16px"
                 android:paddingRight="16px"
                 android:layout_width="wrap_content"
@@ -246,11 +268,49 @@
                 android:id="@+id/scheduleEditText"
                 android:background="#ffffff"
                 android:lines="3"
-                android:editable="false"
                 android:layout_alignParentStart="true"
-                android:textSize="16dp"/>
+                android:textSize="16dp"
+                android:layout_column="1" />
 
         </TableRow>
+
+        <TableRow>
+            <RelativeLayout
+                android:layout_column="1"
+                android:gravity="center">
+
+                <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stop"
+                android:id="@+id/stop_broadcast"
+                android:layout_column="1"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/start_broadcast"
+                />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:id="@+id/save_setting"
+                    android:layout_toEndOf="@+id/stop_broadcast"
+                    android:layout_alignBottom="@+id/stop_broadcast"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    android:id="@+id/start_broadcast"
+                    android:layout_column="0"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:centerInParent="true"/>
+
+            </RelativeLayout>
+        </TableRow>
+
 
     </TableLayout>
 

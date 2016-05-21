@@ -39,7 +39,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewer_activity);
+        setContentView(R.layout.broadcaster_activity);
 
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
