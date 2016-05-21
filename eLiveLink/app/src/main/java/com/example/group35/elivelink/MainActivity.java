@@ -120,7 +120,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                 if(jsonObject.getInt("isViewer")== 0){
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     name = jsonObject.getString("username");
-                                    startActivity(new Intent(getApplicationContext(), BroadcastActivity.class));
+                                    Intent intent = new Intent(getApplicationContext(), BroadcasterListActivity.class);
+                                    intent.putExtra("userID", jsonObject.getString("userID"));
+                                    startActivity(intent);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(getApplicationContext(), ListActivity.class));
@@ -203,7 +205,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                         if(jsonObject.getInt("isViewer")== 0){
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                             name = jsonObject.getString("username");
-                            startActivity(new Intent(getApplicationContext(), BroadcastActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), BroadcasterListActivity.class);
+                            intent.putExtra("userID", jsonObject.getString("userID"));
+                            startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), ListActivity.class));

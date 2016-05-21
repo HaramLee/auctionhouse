@@ -39,7 +39,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
     private List<Broadcast> broadcasts;
     private List<String> broadcastNames;
 
-    private int userID = 2;
+    private int userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,9 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcasts = new ArrayList<>();
         broadcastNames = new ArrayList<>();
         broadcastListView = (ListView) findViewById(R.id.broadcastListView);
+
+        Intent intent = getIntent();
+        userID = Integer.parseInt(intent.getExtras().getString("userID"));
 
         getUserBroadcasts();
 
