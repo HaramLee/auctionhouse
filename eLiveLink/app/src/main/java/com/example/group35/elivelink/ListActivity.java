@@ -162,10 +162,6 @@ public class ListActivity extends AppCompatActivity {
      */
     protected void initializeSpinner(){
 
-        Integer[] imgid={
-                R.drawable.ic_launcher,
-
-        };
         ListView testlist;
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,broadcasters_list);
         testlist=(ListView)findViewById(R.id.broadcastListView);
@@ -180,48 +176,21 @@ public class ListActivity extends AppCompatActivity {
 
         });
 
-
-//        ListView list;
-//        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
-//        list=(ListView)findViewById(R.id.broadcastListView);
-//        list.setAdapter(adapter);
-
-//        final Intent to_viewer = new Intent(this, ViewerActivity.class);
-//
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                for (Broadcast a : broadcasts) {
-//                    if (a.getBroadcastName().equalsIgnoreCase(spinnerArray.get(position).toString())) {
-//                        to_viewer.putExtra("broadcaster_name", a.getBroadcastName());
-//                        to_viewer.putExtra("broadcaster_bio", a.getBio());
-//                        to_viewer.putExtra("broadcaster_schedule", a.getSchedule());
-//                        to_viewer.putExtra("broadcaster_youtube", a.getYoutubeVidID());
-//                        break;
-//                    }
-//                }
-//
-//                startActivity(to_viewer);
-//
-//
-//            }
-//        });
     }
 
     public void onFilter(final View view) {
 
-        spinnerArray.clear();
-        scheduleArray.clear();
+        broadcasters_list.clear();
+        userID_list.clear();
 
         for(Broadcast a: broadcasts) {
-            if(a.getBroadcastName().toLowerCase().contains(filterEditText.getText().toString().toLowerCase())) {
-                spinnerArray.add(a.getBroadcastName());
-                scheduleArray.add(a.getSchedule());
+            if(a.getUserName().toLowerCase().contains(filterEditText.getText().toString().toLowerCase())) {
+                broadcasters_list.add(a.getUserName());
+                userID_list.add(a.getUserID());
             }
         }
 
-        if(spinnerArray.size() == 0) {
+        if(broadcasters_list.size() == 0) {
             refreshSpinner();
             Toast.makeText(ListActivity.this, "Broadcast name not found.", Toast.LENGTH_SHORT).show();
         }
@@ -267,7 +236,14 @@ public class ListActivity extends AppCompatActivity {
 
     public void popup(final View view, int pos)
     {
+
+        Integer[] imgid={
+                R.drawable.ic_launcher,
+
+        };
+
         spinnerArray.clear();
+        scheduleArray.clear();
 
         for(Broadcast a: broadcasts) {
             if (a.getUserID() == userID_list.get(pos)) {
@@ -282,14 +258,15 @@ public class ListActivity extends AppCompatActivity {
         View convertView = (View) inflater.inflate(R.layout.pop_up_list_activity, null);
         alertDialog.setView(convertView);
         alertDialog.setTitle("Available Stream");
-        ListView lv = (ListView) convertView.findViewById(R.id.popup_listView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,spinnerArray);
-        lv.setAdapter(adapter);
+
+        ListView list = (ListView) convertView.findViewById(R.id.popup_listView);
+        CustomListAdapter adapter=new CustomListAdapter(this, spinnerArray, scheduleArray ,imgid );
+        list.setAdapter(adapter);
         alertDialog.show();
 
         final Intent to_viewer = new Intent(this, ViewerActivity.class);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 //                Toast.makeText(ListActivity.this, spinnerArray.get(position),
