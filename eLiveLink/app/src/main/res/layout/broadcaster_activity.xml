@@ -306,7 +306,7 @@
                     android:layout_column="0"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
-                    android:centerInParent="true"/>
+                    />
 
             </RelativeLayout>
         </TableRow>
