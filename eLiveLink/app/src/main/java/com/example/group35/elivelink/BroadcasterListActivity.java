@@ -87,6 +87,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                                 tempBroadcast.setBroadcastName(((JSONObject) jsonBroadcasts.get(key)).getString("broadcastName"));
                                 tempBroadcast.setSchedule(((JSONObject) jsonBroadcasts.get(key)).getString("schedule"));
                                 tempBroadcast.setYoutubeVidID(((JSONObject) jsonBroadcasts.get(key)).getString("youtubeVidID"));
+                                tempBroadcast.setIsBroadcasting(((JSONObject) jsonBroadcasts.get(key)).getInt("isBroadcasting"));
 
                                 broadcasts.add(tempBroadcast);
                             }

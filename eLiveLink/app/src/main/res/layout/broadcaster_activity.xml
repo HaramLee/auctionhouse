@@ -3,392 +3,256 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.group35.videostream.TestMainActivity2">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/loginSpace"
-        android:layout_alignParentBottom="true"
-        android:minHeight="120px"
-        android:background="#86d8f8"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Payment Details"
-        android:id="@+id/button_payment"
-        android:layout_alignTop="@+id/loginSpace"
-        android:layout_alignEnd="@+id/loginSpace"
-        android:textSize="25px"
-        android:layout_toEndOf="@+id/textView8" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="         John Doe"
-        android:paddingTop="10px"
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/loginSpace"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="         Account Balance: $125"
-        android:paddingBottom="10px"
-        android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/loginSpace"
-        android:layout_alignParentStart="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchSpace"
-        android:minHeight="700px"
-        android:background="#86d8f8"
-        android:layout_above="@+id/padding"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true" />
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_above="@+id/loginSpace"
-        android:layout_alignParentStart="true"
-        android:minHeight="10px"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/padding" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Broadcaster by name / keyword"
-        android:id="@+id/textView3"
-        android:textSize="30px"
-        android:layout_alignTop="@+id/searchSpace"
-        android:layout_alignParentStart="true"
-        android:paddingTop="15px"
-        android:paddingLeft="15px" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/filterBroadcastEditText"
-        android:hint = "Search in broadcasters"
-        android:textSize="40px"
-        android:layout_below="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3"
-        android:background="#ffffff" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Filter"
-        android:id="@+id/button2"
-        android:layout_toEndOf="@+id/filterBroadcastEditText"
-        android:layout_alignTop="@id/filterBroadcastEditText"
-        android:textSize="30px"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:onClick="updateBroadcast" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Available Broadcasters"
-        android:id="@+id/textView4"
-        android:layout_alignTop="@+id/searchSpace"
-        android:layout_alignParentEnd="true"
-        android:paddingTop="15px"
-        android:paddingRight="80px"
-        android:textSize="30px" />
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_below="@+id/textView4"
-        android:layout_alignStart="@+id/textView4"
-        android:spinnerMode="dropdown"
-        android:background="#ffffff" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="First Baptist Church:"
-        android:id="@+id/textView9"
-        android:layout_below="@+id/button2"
-        android:layout_alignStart="@+id/bioEditText"
-        android:textSize="40px" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/bioEditText"
-        android:layout_below="@+id/button2"
-        android:background="#ffffff"
-        android:lines="3"
-        android:text="Bio"
-        android:textSize="40px"
-        android:minWidth="900px"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:paddingLeft="15px"
-        android:paddingRight="15px" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/scheduleEditText"
-        android:background="#ffffff"
-        android:lines="3"
-        android:text="Schedule"
-        android:textSize="40px"
-        android:minWidth="900px"
-        android:paddingLeft="15px"
-        android:paddingRight="15px"
-        android:layout_below="@+id/padding2"
-        android:layout_centerHorizontal="true" />
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:minHeight="10px"
-        android:id="@+id/padding2"
-        android:layout_below="@+id/bioEditText"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Broadcast"
-        android:id="@+id/button3"
-        android:layout_below="@+id/scheduleEditText"
-        android:layout_alignEnd="@+id/scheduleEditText"
-        android:textSize="30px"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:onClick="stopBroadcast" />
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:minHeight="10px"
-        android:id="@+id/spaceAboveSearchSpace"
-        android:layout_above="@+id/searchSpace"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/controlSpace"
-        android:minHeight="200px"
-        android:background="#86d8f8"
-        android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"/>
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1"
-        android:id="@+id/button4"
-        android:layout_alignBottom="@+id/controlSpace"
-        android:layout_alignStart="@+id/filterBroadcastEditText"
-        android:minHeight="0dp"
-        android:minWidth="0dp" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2"
-        android:id="@+id/button5"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button4" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3"
-        android:id="@+id/button6"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button5" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="4"
-        android:id="@+id/button7"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button6" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/button8"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_above="@+id/spaceAboveSearchSpace"
-        android:layout_toEndOf="@+id/button7" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"
-        android:id="@+id/button9"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button8" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="&lt;"
-        android:id="@+id/button10"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button9" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=">"
-        android:id="@+id/button11"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button10" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="^"
-        android:id="@+id/button12"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button11" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="v"
-        android:id="@+id/button13"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_alignBottom="@+id/controlSpace"
-        android:layout_toEndOf="@+id/button12" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Camera"
-        android:id="@+id/textView5"
-        android:layout_above="@+id/button4"
-        android:layout_alignStart="@+id/button4" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Zoom"
-        android:id="@+id/textView6"
-        android:layout_above="@+id/button8"
-        android:layout_toEndOf="@+id/textView3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Pan"
-        android:id="@+id/textView7"
-        android:layout_above="@+id/button10"
-        android:layout_alignStart="@+id/button10" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Tilt"
-        android:id="@+id/textView8"
-        android:layout_above="@+id/button12"
-        android:layout_alignStart="@+id/button12" />
-
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_above="@+id/controlSpace"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/vidControlPadding"
-        android:minHeight="10px" />
+    tools:context="com.example.group35.elivelink.MainActivity">
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/youtube_view"
-        android:minHeight="120px"
-        android:background="#86d8f8"
-        android:layout_above="@+id/vidControlPadding"
-        android:layout_alignStart="@+id/controlSpace"
+        android:minHeight="100px"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
     </com.google.android.youtube.player.YouTubePlayerView>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+    <TableLayout
+        android:layout_below="@+id/youtube_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Broadcast"
-        android:id="@+id/button14"
-        android:textSize="30px"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
-        android:layout_below="@+id/scheduleEditText"
-        android:layout_alignStart="@+id/scheduleEditText"
-        android:onClick="startBroadcast" />
+        android:stretchColumns="1"
+        android:id="@+id/table1"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:id="@+id/logout_but"
-        android:layout_alignBottom="@+id/button_payment"
-        android:layout_toStartOf="@+id/button_payment"
-        android:layout_alignTop="@+id/loginSpace" />
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+        </TableRow>
+
+
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/controlSpace"
+                    android:layout_gravity="center"
+                    android:background="#86d8f8"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentStart="true"/>
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:id="@+id/button4"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_alignTop="@+id/button5"
+                    android:layout_alignParentStart="true" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:id="@+id/button5"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_below="@+id/textView5"
+                    android:layout_toEndOf="@+id/button4" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:id="@+id/button6"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_below="@+id/textView5"
+                    android:layout_toEndOf="@+id/button5" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:id="@+id/button7"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_below="@+id/textView5"
+                    android:layout_toEndOf="@+id/button6" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:id="@+id/button8"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_alignTop="@+id/button7"
+                    android:layout_toEndOf="@+id/button7" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:id="@+id/button9"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_alignTop="@+id/button8"
+                    android:layout_toEndOf="@+id/button8" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&lt;"
+                    android:id="@+id/button10"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_alignTop="@+id/button9"
+                    android:layout_toEndOf="@+id/button9" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=">"
+                    android:id="@+id/button11"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_alignTop="@+id/button10"
+                    android:layout_toEndOf="@+id/button10" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="^"
+                    android:id="@+id/button12"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_below="@+id/textView8"
+                    android:layout_toEndOf="@+id/button11" />
+
+                <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="v"
+                    android:id="@+id/button13"
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:layout_alignTop="@+id/button12"
+                    android:layout_toEndOf="@+id/button12" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Camera"
+                    android:id="@+id/textView5"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Zoom"
+                    android:id="@+id/textView6"
+                    android:layout_above="@+id/button7"
+                    android:layout_toEndOf="@+id/button7" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Pan"
+                    android:id="@+id/textView7"
+                    android:layout_above="@+id/button9"
+                    android:layout_alignEnd="@+id/button10" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="Tilt"
+                    android:id="@+id/textView8"
+                    android:layout_above="@+id/button11"
+                    android:layout_toEndOf="@+id/button11" />
+            </RelativeLayout>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                />
+
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Title"
+                android:id="@+id/broadcastNameView"
+                android:textSize="20dp" />
+
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:paddingLeft="16px"
+                android:paddingRight="16px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/bioEditText"
+                android:background="#ffffff"
+                android:lines="3"
+                android:editable="false"
+                android:layout_alignParentStart="true"
+                android:textSize="16dp"/>
+
+        </TableRow>
+
+        <TableRow>
+            <EditText
+                android:paddingLeft="16px"
+                android:paddingRight="16px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:ems="10"
+                android:id="@+id/scheduleEditText"
+                android:background="#ffffff"
+                android:lines="3"
+                android:editable="false"
+                android:layout_alignParentStart="true"
+                android:textSize="16dp"/>
+
+        </TableRow>
+
+    </TableLayout>
 
 
 </RelativeLayout>
