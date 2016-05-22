@@ -57,7 +57,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcastListView = (ListView) findViewById(R.id.broadcastListView);
 
         Intent intent = getIntent();
-       // userID = Integer.parseInt(intent.getExtras().getString("userID"));
+        //userID = Integer.parseInt(intent.getExtras().getString("userID"));
 
         userID = 2;
         getUserBroadcasts();
@@ -80,7 +80,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                 System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.names().get(0).equals("success")) {
+                    if (jsonObject.has("success")) {
                         //Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                         JSONObject jsonBroadcasts = jsonObject.getJSONObject("broadcastList");
 
@@ -148,7 +148,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                 System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.names().get(0).equals("success")) {
+                    if (jsonObject.has("success")) {
                         Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
@@ -194,7 +194,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                 System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.names().get(0).equals("success")) {
+                    if (jsonObject.has("success")) {
                         Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
@@ -307,6 +307,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_settings:
                 Intent payment_activity = new Intent(BroadcasterListActivity.this, PaymentDetailsActivity.class);
+                payment_activity.putExtra("userID", userID);
                 startActivity(payment_activity);
                 break;
             case R.id.logout_settings:

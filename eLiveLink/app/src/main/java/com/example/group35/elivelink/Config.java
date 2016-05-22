@@ -15,6 +15,7 @@ public final class Config {
     //Database connection values
     public static final String DB_USER_CONTROL_URL = "http://frontlineventure.com/db_control/user_control.php";
     public static final String DB_BROADCAST_CONTROL_URL = "http://frontlineventure.com/db_control/broadcast_control.php";
+    public static final String DB_BILLING_CONTROL_URL = "http://frontlineventure.com/db_control/billing_control.php";
     public static final String DB_QUERY_PASSWORD = "9e3d1f6e3b75eda9922844ca8b0d88b3";
     public static final String DB_QUERY_TYPE_USER_LOGIN = "login";
     public static final String DB_QUERY_TYPE_GET_BROADCASTS = "getBroadcasts";
@@ -23,5 +24,7 @@ public final class Config {
     public static final String DB_QUERY_TYPE_TOGGLE_BROADCAST = "toggleBroadcast";
     public static final String DB_QUERY_TYPE_DELETE_BROADCAST = "deleteBroadcast";
     public static final String DB_QUERY_TYPE_GET_BROADCASTS_WITH_USERID = "getUserBroadcasts"; //for broadcasters
+    public static final String DB_QUERY_TYPE_GET_BILLING = "getPaymentDetails";
+    public static final String DB_QUERY_TYPE_SET_BILLING = "setPaymentDetails";
 
 }

@@ -167,7 +167,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
                 System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.names().get(0).equals("success")) {
+                    if (jsonObject.has("success")) {
                         Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Error " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
@@ -214,7 +214,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
                 System.out.println(response);
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.names().get(0).equals("success")) {
+                    if (jsonObject.has("success")) {
                         Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
@@ -252,7 +252,12 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         updateCurrentBroadcastWithTextFields();
         updateBroadcast();
 
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        if(player == null) {
+            youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        }else {
+            player.loadVideo(currentBroadcast.getYoutubeVidID());
+        }
+
 
     }
 
