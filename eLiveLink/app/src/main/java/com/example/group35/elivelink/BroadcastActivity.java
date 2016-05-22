@@ -252,7 +252,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         updateCurrentBroadcastWithTextFields();
         updateBroadcast();
 
-        //player.loadVideo(currentBroadcast.getYoutubeVidID());
+        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
     }
 

@@ -3,8 +3,12 @@ package com.example.group35.elivelink;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,8 +57,9 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcastListView = (ListView) findViewById(R.id.broadcastListView);
 
         Intent intent = getIntent();
-        userID = Integer.parseInt(intent.getExtras().getString("userID"));
+       // userID = Integer.parseInt(intent.getExtras().getString("userID"));
 
+        userID = 2;
         getUserBroadcasts();
 
     }
@@ -244,21 +249,21 @@ public class BroadcasterListActivity extends AppCompatActivity {
                 builder.setMessage(broadcasts.get(pos).getBroadcastName())
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(), "Delete " + broadcasts.get(pos).getBroadcastName(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Delete " + broadcasts.get(pos).getBroadcastName(), Toast.LENGTH_SHORT).show();
                                 deleteBroadcast(broadcasts.get(pos).getBcID());
                                 dialog.cancel();
                             }
                         })
                         .setNegativeButton("Edit", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(getApplicationContext(), "Edit " + broadcasts.get(pos).getBroadcastName(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "Edit " + broadcasts.get(pos).getBroadcastName(), Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(getApplicationContext(), BroadcastActivity.class);
-                                intent.putExtra("bcID",broadcasts.get(pos).getBcID());
-                                intent.putExtra("broadcastName",broadcasts.get(pos).getBroadcastName());
-                                intent.putExtra("bio",broadcasts.get(pos).getBio());
-                                intent.putExtra("schedule",broadcasts.get(pos).getSchedule());
-                                intent.putExtra("youtubeVidID",broadcasts.get(pos).getYoutubeVidID());
+                                intent.putExtra("bcID", broadcasts.get(pos).getBcID());
+                                intent.putExtra("broadcastName", broadcasts.get(pos).getBroadcastName());
+                                intent.putExtra("bio", broadcasts.get(pos).getBio());
+                                intent.putExtra("schedule", broadcasts.get(pos).getSchedule());
+                                intent.putExtra("youtubeVidID", broadcasts.get(pos).getYoutubeVidID());
 
                                 startActivity(intent);
                                 dialog.cancel();
@@ -278,5 +283,41 @@ public class BroadcasterListActivity extends AppCompatActivity {
 
         createBroadcast();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_logout, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                Intent payment_activity = new Intent(BroadcasterListActivity.this, PaymentDetailsActivity.class);
+                startActivity(payment_activity);
+                break;
+            case R.id.logout_settings:
+                SharedPreferences.Editor editor = MainActivity.mPreferences.edit();
+                editor.clear();   // This will delete all your preferences, check how to delete just one
+                editor.commit();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
