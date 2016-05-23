@@ -57,9 +57,9 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcastListView = (ListView) findViewById(R.id.broadcastListView);
 
         Intent intent = getIntent();
-        //userID = Integer.parseInt(intent.getExtras().getString("userID"));
+        userID = Integer.parseInt(intent.getExtras().getString("userID"));
 
-        userID = 2;
+        //userID = 2;
         getUserBroadcasts();
 
     }
