@@ -56,6 +56,10 @@ public class ViewerActivity extends YouTubeBaseActivity implements YouTubePlayer
         broadcastNameTextView.setText(broad_name);
         bioEditText.setText(broad_bio);
         scheduleEditText.setText(broad_schedule);
+
+        if((!current_vid.isEmpty()) || current_vid != null) {
+            youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        }
     }
 
     @Override
