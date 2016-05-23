@@ -299,4 +299,12 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         toggleBroadcast(0);
     }
 
+    /**
+     * Any of the PTZ buttons
+     * @param view
+     */
+    public void onPTZClick(final View view) {
+        Toast.makeText(getApplicationContext(), "This feature is currently unavailable.", Toast.LENGTH_SHORT).show();
+    }
+
 }
