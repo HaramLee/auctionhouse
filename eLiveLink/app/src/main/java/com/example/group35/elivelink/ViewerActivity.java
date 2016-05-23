@@ -127,5 +127,13 @@ public class ViewerActivity extends YouTubeBaseActivity implements YouTubePlayer
         startActivity(new Intent(getApplicationContext(), ListActivity.class));
     }
 
+    /**
+     * Any of the PTZ buttons
+     * @param view
+     */
+    public void onPTZClick(final View view) {
+        Toast.makeText(getApplicationContext(), "This feature is currently unavailable.", Toast.LENGTH_SHORT).show();
+    }
+
 }
 
