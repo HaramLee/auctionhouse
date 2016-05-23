@@ -97,6 +97,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                                 tempBroadcast.setBio(((JSONObject) jsonBroadcasts.get(key)).getString("bio"));
                                 tempBroadcast.setBroadcastName(((JSONObject) jsonBroadcasts.get(key)).getString("broadcastName"));
                                 tempBroadcast.setSchedule(((JSONObject) jsonBroadcasts.get(key)).getString("schedule"));
+                                tempBroadcast.setSubscribeCost(((JSONObject) jsonBroadcasts.get(key)).getDouble("subscribeCost"));
                                 tempBroadcast.setYoutubeVidID(((JSONObject) jsonBroadcasts.get(key)).getString("youtubeVidID"));
                                 tempBroadcast.setIsBroadcasting(((JSONObject) jsonBroadcasts.get(key)).getInt("isBroadcasting"));
 
@@ -263,6 +264,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                                 intent.putExtra("broadcastName", broadcasts.get(pos).getBroadcastName());
                                 intent.putExtra("bio", broadcasts.get(pos).getBio());
                                 intent.putExtra("schedule", broadcasts.get(pos).getSchedule());
+                                intent.putExtra("subscribeCost", broadcasts.get(pos).getSubscribeCost());
                                 intent.putExtra("youtubeVidID", broadcasts.get(pos).getYoutubeVidID());
 
                                 startActivity(intent);

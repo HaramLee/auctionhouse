@@ -38,6 +38,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
     private EditText bioEditText;
     private EditText scheduleEditText;
     private EditText youtubeVidIDEditText;
+    private EditText subscribeCostEditText;
 
     private Broadcast currentBroadcast;
     private RequestQueue requestQueue;
@@ -59,15 +60,19 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         bioEditText = (EditText) findViewById(R.id.bioEditText);
         scheduleEditText = (EditText) findViewById(R.id.scheduleEditText);
         youtubeVidIDEditText = (EditText) findViewById(R.id.youtubeEditText);
+        subscribeCostEditText = (EditText) findViewById(R.id.priceEditText);
 
         Intent intent = getIntent();
         currentBroadcast.setYoutubeVidID(intent.getExtras().getString("youtubeVidID"));
         currentBroadcast.setBroadcastName(intent.getExtras().getString("broadcastName"));
         currentBroadcast.setBio(intent.getExtras().getString("bio"));
         currentBroadcast.setSchedule(intent.getExtras().getString("schedule"));
+        currentBroadcast.setSubscribeCost(intent.getExtras().getDouble("subscribeCost"));
         currentBroadcast.setBcID(intent.getExtras().getInt("bcID"));
 
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        if(!currentBroadcast.getYoutubeVidID().isEmpty()) {
+            youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        }
 
         populateTextFields();
     }
@@ -145,6 +150,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         bioEditText.setText(currentBroadcast.getBio());
         scheduleEditText.setText(currentBroadcast.getSchedule());
         youtubeVidIDEditText.setText(currentBroadcast.getYoutubeVidID());
+        subscribeCostEditText.setText("" + currentBroadcast.getSubscribeCost());
     }
 
     public void updateCurrentBroadcastWithTextFields() {
@@ -152,6 +158,7 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
         currentBroadcast.setBio(bioEditText.getText().toString());
         currentBroadcast.setSchedule(scheduleEditText.getText().toString());
         currentBroadcast.setYoutubeVidID(youtubeVidIDEditText.getText().toString());
+        currentBroadcast.setSubscribeCost(Double.parseDouble(subscribeCostEditText.getText().toString()));
     }
 
     /**
