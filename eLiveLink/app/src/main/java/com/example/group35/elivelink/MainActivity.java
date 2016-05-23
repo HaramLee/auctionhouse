@@ -65,6 +65,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getDefaults();
+
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
         youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
 
@@ -301,5 +303,48 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    /**
+     * Get default video / news from the database
+     */
+    public void getDefaults(){
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        request = new StringRequest(Request.Method.POST, Config.DB_DEFAULT_CONTROL_URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println(response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.has("success")) {
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("db_query_password", Config.DB_QUERY_PASSWORD);
+                hashMap.put("db_query_type", Config.DB_QUERY_TYPE_GET_DEFAULTS);
+
+                return hashMap;
+            }
+        };
+
+        requestQueue.add(request);
     }
 }
