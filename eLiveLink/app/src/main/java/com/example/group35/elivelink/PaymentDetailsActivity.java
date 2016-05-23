@@ -34,6 +34,7 @@ public class PaymentDetailsActivity extends AppCompatActivity {
     private EditText ccCVVEditText;
 
     private int userID;
+    static final String KEY_USERID = "login_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,9 @@ public class PaymentDetailsActivity extends AppCompatActivity {
         ccExpiryEditText = (EditText) findViewById(R.id.expiryDateEditText);
         ccCVVEditText = (EditText) findViewById(R.id.cvvEditText);
 
-        Intent intent = getIntent();
-        userID = intent.getExtras().getInt("userID");
+
+        String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
+        userID = Integer.parseInt(string_userID);
 
         getBillingInformation();
     }

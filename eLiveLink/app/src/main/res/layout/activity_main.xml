@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:padding="8dp"
-                android:text="ID: "
+                android:text="Email: "
                 android:textSize="18sp" />
 
             <EditText

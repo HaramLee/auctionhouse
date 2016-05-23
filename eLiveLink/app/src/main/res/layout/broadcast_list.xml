@@ -7,7 +7,10 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.group35.videostream.BroadcastListingActivity">
+    tools:context="com.example.group35.videostream.BroadcastListingActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    >
 
     <EditText
         android:layout_width="wrap_content"
@@ -15,8 +18,10 @@
         android:id="@+id/filterBroadcastEditText"
         android:hint = "Search in broadcasters"
         android:background="#ffffff"
-        android:layout_above="@+id/broadcastListView"
-        android:layout_alignTop="@+id/button2" />
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/button2"
+        android:layout_alignBottom="@+id/button2" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -29,8 +34,7 @@
         android:minHeight="0dp"
         android:onClick="onFilter"
         android:layout_alignParentTop="true"
-        android:layout_alignEnd="@+id/broadcastListView"
-        android:layout_marginEnd="29dp" />
+        android:layout_alignEnd="@+id/broadcastListView" />
 
     <ListView
         android:layout_width="wrap_content"
