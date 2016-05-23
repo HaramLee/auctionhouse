@@ -47,6 +47,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
     private EditText password_text;
     private EditText email_text;
+    private EditText newsEditText;
     private Button sign_in_register;
 
     public static SharedPreferences mPreferences;
@@ -60,19 +61,21 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     static final String KEY_USERID = "login_id";
     static final String KEY_BALANCE ="login_balance";
 
+    private String dbVideo;
+    private String dbNews;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getDefaults();
-
         youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
-
         email_text = (EditText) findViewById(R.id.email);
         password_text = (EditText) findViewById(R.id.password);
         sign_in_register = (Button) findViewById(R.id.sign_in);
+        newsEditText = (EditText) findViewById(R.id.newsEditText);
+
+        getDefaults();
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -94,7 +97,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
                                 editor.putString("username", "key");
 
-                                if(jsonObject.has("isViewer")){
+                                if (jsonObject.has("isViewer")) {
                                     isViewer = jsonObject.getString("isViewer");
                                     balance = jsonObject.getString("accountBalance");
                                     balanceSave = jsonObject.getString("accountBalance");
@@ -128,13 +131,13 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                                             }
                                         }, 3000);
 
-                                if((!(jsonObject.has("isViewer")) || jsonObject.getInt("isViewer") == 1)) {
+                                if ((!(jsonObject.has("isViewer")) || jsonObject.getInt("isViewer") == 1)) {
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), ListActivity.class);
                                     //intent.putExtra("userID",userIDSave );
                                     startActivity(intent);
 
-                                } else if(jsonObject.getInt("isViewer") == 0){
+                                } else if (jsonObject.getInt("isViewer") == 0) {
                                     Toast.makeText(getApplicationContext(), "Success: " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                                     name = jsonObject.getString("username");
                                     Intent intent = new Intent(getApplicationContext(), BroadcasterListActivity.class);
@@ -265,8 +268,14 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, final YouTubePlayer player, boolean wasRestored) {
 
+        String mVideoId;
         this.player = player;
-        String mVideoId = Config.DEFAULT_VIDEO;
+
+        if(dbVideo != null) {
+            mVideoId = dbVideo;
+        }else {
+            mVideoId = Config.DEFAULT_VIDEO;
+        }
 
         if (mVideoId != null) {
             if (wasRestored) {
@@ -319,15 +328,20 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("success")) {
-                        Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                        dbVideo = jsonObject.getString("defaultYoutubeVidID");
+                        dbNews = jsonObject.getString("defaultNews");
+
                     } else {
-                        Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                populateNews();
+                youTubeView.initialize(Config.YOUTUBE_API_KEY, MainActivity.this);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -347,4 +361,17 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
         requestQueue.add(request);
     }
+
+    /**
+     * Populate news with either DB or Config
+     */
+    private void populateNews() {
+
+        if(dbNews != null) {
+            newsEditText.setText(dbNews);
+        }else {
+            newsEditText.setText(Config.DEFAULT_NEWS);
+        }
+    }
+
 }

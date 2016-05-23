@@ -11,6 +11,7 @@ public final class Config {
     public static final String YOUTUBE_API_KEY = "AIzaSyB426dqWxl3tYB7RfdUBtHF5JMNR2q-WSs";
 
     public static final String DEFAULT_VIDEO = "WVP3fUzQHcg";
+    public static final String DEFAULT_NEWS = "There are no news at this time.";
 
     //Database connection values
     public static final String DB_USER_CONTROL_URL = "http://frontlineventure.com/db_control/user_control.php";
