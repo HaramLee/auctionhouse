@@ -158,8 +158,10 @@ public class ListActivity extends AppCompatActivity {
         userID_list.clear();
 
         for(Broadcast a: broadcasts) {
-            broadcasters_list.add(a.getUserName());
-            userID_list.add(a.getUserID());
+            if(!userID_list.contains(a.getUserID())) {
+                broadcasters_list.add(a.getUserName());
+                userID_list.add(a.getUserID());
+            }
         }
 
         initializeSpinner();
