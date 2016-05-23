@@ -85,7 +85,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            if (jsonObject.names().get(0).equals("success")) {
+                            if (jsonObject.has("success")) {
 
                                 editor.putString("username", "key");
 
@@ -181,7 +181,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.names().get(0).equals("success")) {
+                    if (jsonObject.has("success")) {
 
                         isViewer = jsonObject.getString("isViewer");
                         balance = jsonObject.getString("accountBalance");
