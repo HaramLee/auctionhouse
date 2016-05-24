@@ -161,7 +161,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
 
                         initializeListView();
                     } else {
-                        Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
@@ -304,7 +304,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
         }
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(BroadcasterListActivity.this, android.R.layout.simple_list_item_1, broadcastNames);
-        Broadcaster_CustomListAdapter adapter_broadcast=new Broadcaster_CustomListAdapter
+        final Broadcaster_CustomListAdapter adapter_broadcast=new Broadcaster_CustomListAdapter
                 (this, broadcastNames, scheduleArray , isBroadcastingArray ,imgid );
         broadcastListView.setAdapter(adapter_broadcast);
         broadcastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -317,6 +317,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 //Toast.makeText(getApplicationContext(), "Delete " + broadcasts.get(pos).getBroadcastName(), Toast.LENGTH_SHORT).show();
                                 deleteBroadcast(broadcasts.get(pos).getBcID());
+                                adapter_broadcast.remove(adapter_broadcast.getItem(pos));
                                 dialog.cancel();
                             }
                         })
