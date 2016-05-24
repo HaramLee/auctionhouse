@@ -48,6 +48,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
 
     private List<String> scheduleArray;
     private List<Integer> isBroadcastingArray;
+    private List<Double> subscribeCostArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcastNames = new ArrayList<>();
         scheduleArray = new ArrayList<>();
         isBroadcastingArray = new ArrayList<>();
+        subscribeCostArray = new ArrayList<>();
         broadcastListView = (ListView) findViewById(R.id.broadcasterListView);
 
         String string_userID = MainActivity.mPreferences.getString(KEY_USERID, "");
@@ -291,6 +293,7 @@ public class BroadcasterListActivity extends AppCompatActivity {
         broadcastNames.clear();
         scheduleArray.clear();
         isBroadcastingArray.clear();
+        subscribeCostArray.clear();
 
         Integer[] imgid={
                 R.drawable.x_mark,
@@ -301,11 +304,12 @@ public class BroadcasterListActivity extends AppCompatActivity {
             broadcastNames.add(a.getBroadcastName());
             scheduleArray.add(a.getSchedule());
             isBroadcastingArray.add(a.getIsBroadcasting());
+            subscribeCostArray.add(a.getSubscribeCost());
         }
 
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(BroadcasterListActivity.this, android.R.layout.simple_list_item_1, broadcastNames);
         final Broadcaster_CustomListAdapter adapter_broadcast=new Broadcaster_CustomListAdapter
-                (this, broadcastNames, scheduleArray , isBroadcastingArray ,imgid );
+                (this, broadcastNames, scheduleArray , isBroadcastingArray , subscribeCostArray, imgid );
         broadcastListView.setAdapter(adapter_broadcast);
         broadcastListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
