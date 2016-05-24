@@ -177,9 +177,9 @@ public class BroadcastActivity extends YouTubeBaseActivity implements YouTubePla
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.has("success")) {
-                        Toast.makeText(getApplicationContext(), "Success " + jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Error " + jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), jsonObject.getString("error"), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
